@@ -982,58 +982,72 @@
             <span class="source-panel-tag">backup()</span>
           </div>
           <div class="source-code">
-            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="kw">void</span> <span class="type">FileManager</span>::<span class="fn">backup</span>() {</span></div>
-            <div class="line"><span class="line-num">2</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(db_file_path)) {</span></div>
-            <div class="line"><span class="line-num">3</span><span class="line-content">        <span class="kw">return</span>;</span></div>
-            <div class="line"><span class="line-num">4</span><span class="line-content">    }</span></div>
-            <div class="line"><span class="line-num">5</span><span class="line-content"></span></div>
-            <div class="line"><span class="line-num">6</span><span class="line-content">    <span class="kw">const</span> <span class="type">std::string</span> backup_folder <span class="op">=</span> db_folder <span class="op">+</span> <span class="str">"/backup"</span>;</span></div>
-            <div class="line"><span class="line-num">7</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(backup_folder)) {</span></div>
-            <div class="line"><span class="line-num">8</span><span class="line-content">        fs::<span class="fn">create_directories</span>(backup_folder);</span></div>
-            <div class="line"><span class="line-num">9</span><span class="line-content">    }</span></div>
-            <div class="line"><span class="line-num">10</span><span class="line-content"></span></div>
-            <div class="line"><span class="line-num">11</span><span class="line-content">    <span class="kw">const</span> <span class="kw">auto</span> now <span class="op">=</span> std::<span class="fn">chrono::system_clock::now</span>();</span></div>
-            <div class="line"><span class="line-num">12</span><span class="line-content">    <span class="kw">const</span> std::time_t time <span class="op">=</span> std::<span class="fn">chrono::system_clock::to_time_t</span>(now);</span></div>
-            <div class="line"><span class="line-num">13</span><span class="line-content">    <span class="type">std::tm</span> localTime{};</span></div>
-            <div class="line"><span class="line-num">14</span><span class="line-content"><span class="pp">#ifdef _WIN32</span></span></div>
-            <div class="line"><span class="line-num">15</span><span class="line-content">    <span class="fn">localtime_s</span>(<span class="op">&amp;</span>localTime, <span class="op">&amp;</span>time);</span></div>
-            <div class="line"><span class="line-num">16</span><span class="line-content"><span class="pp">#else</span></span></div>
-            <div class="line"><span class="line-num">17</span><span class="line-content">    <span class="fn">localtime_r</span>(<span class="op">&amp;</span>time, <span class="op">&amp;</span>localTime);</span></div>
-            <div class="line"><span class="line-num">18</span><span class="line-content"><span class="pp">#endif</span></span></div>
-            <div class="line"><span class="line-num">19</span><span class="line-content"></span></div>
-            <div class="line"><span class="line-num">20</span><span class="line-content">    <span class="type">std::ostringstream</span> timestamp;</span></div>
-            <div class="line"><span class="line-num">21</span><span class="line-content">    timestamp <span class="op">&lt;&lt;</span> std::<span class="fn">put_time</span>(<span class="op">&amp;</span>localTime, <span class="str">"%Y-%m-%d_%H-%M-%S"</span>);</span></div>
-            <div class="line"><span class="line-num">22</span><span class="line-content">    <span class="kw">const</span> <span class="type">std::string</span> backup_path <span class="op">=</span></span></div>
-            <div class="line"><span class="line-num">23</span><span class="line-content">        backup_folder <span class="op">+</span> <span class="str">"/records_"</span> <span class="op">+</span> timestamp.<span class="fn">str</span>() <span class="op">+</span> <span class="str">".psv"</span>;</span></div>
-            <div class="line"><span class="line-num">24</span><span class="line-content"></span></div>
-            <div class="line"><span class="line-num">25</span><span class="line-content">    <span class="kw">try</span> {</span></div>
-            <div class="line"><span class="line-num">26</span><span class="line-content">        fs::<span class="fn">copy_file</span>(db_file_path, backup_path,</span></div>
-            <div class="line"><span class="line-num">27</span><span class="line-content">                      fs::<span class="fn">copy_options::overwrite_existing</span>);</span></div>
-            <div class="line"><span class="line-num">28</span><span class="line-content">    } <span class="kw">catch</span> (<span class="kw">const</span> fs::<span class="type">filesystem_error</span> <span class="op">&amp;</span>) {</span></div>
-            <div class="line"><span class="line-num">29</span><span class="line-content">        <span class="kw">return</span>;</span></div>
-            <div class="line"><span class="line-num">30</span><span class="line-content">    }</span></div>
-            <div class="line"><span class="line-num">31</span><span class="line-content"></span></div>
-            <div class="line"><span class="line-num">32</span><span class="line-content">    <span class="type">std::vector</span><span class="op">&lt;</span>fs::<span class="type">directory_entry</span><span class="op">&gt;</span> backupFiles;</span></div>
-            <div class="line"><span class="line-num">33</span><span class="line-content">    <span class="kw">for</span> (<span class="kw">const auto</span> <span class="op">&amp;</span>entry : fs::<span class="fn">directory_iterator</span>(backup_folder)) {</span></div>
-            <div class="line"><span class="line-num">34</span><span class="line-content">        <span class="kw">if</span> (entry.<span class="fn">is_regular_file</span>() <span class="op">&amp;&amp;</span> entry.<span class="fn">path</span>().<span class="fn">extension</span>() <span class="op">==</span> <span class="str">".psv"</span>) {</span></div>
-            <div class="line"><span class="line-num">35</span><span class="line-content">            backupFiles.<span class="fn">push_back</span>(entry);</span></div>
-            <div class="line"><span class="line-num">36</span><span class="line-content">        }</span></div>
-            <div class="line"><span class="line-num">37</span><span class="line-content">    }</span></div>
-            <div class="line"><span class="line-num">38</span><span class="line-content"></span></div>
-            <div class="line"><span class="line-num">39</span><span class="line-content">    <span class="kw">if</span> (backupFiles.<span class="fn">size</span>() <span class="op">&lt;=</span> <span class="num">3</span>) {</span></div>
-            <div class="line"><span class="line-num">40</span><span class="line-content">        <span class="kw">return</span>;</span></div>
-            <div class="line"><span class="line-num">41</span><span class="line-content">    }</span></div>
-            <div class="line"><span class="line-num">42</span><span class="line-content"></span></div>
-            <div class="line"><span class="line-num">43</span><span class="line-content">    std::<span class="fn">sort</span>(backupFiles.<span class="fn">begin</span>(), backupFiles.<span class="fn">end</span>(),</span></div>
-            <div class="line"><span class="line-num">44</span><span class="line-content">              [](<span class="kw">const</span> fs::<span class="type">directory_entry</span> <span class="op">&amp;</span>a, <span class="kw">const</span> fs::<span class="type">directory_entry</span> <span class="op">&amp;</span>b) {</span></div>
-            <div class="line"><span class="line-num">45</span><span class="line-content">                  <span class="kw">return</span> fs::<span class="fn">last_write_time</span>(a) <span class="op">&lt;</span> fs::<span class="fn">last_write_time</span>(b);</span></div>
-            <div class="line"><span class="line-num">46</span><span class="line-content">              });</span></div>
-            <div class="line"><span class="line-num">47</span><span class="line-content"></span></div>
-            <div class="line"><span class="line-num">48</span><span class="line-content">    <span class="kw">while</span> (backupFiles.<span class="fn">size</span>() <span class="op">&gt;</span> <span class="num">3</span>) {</span></div>
-            <div class="line"><span class="line-num">49</span><span class="line-content">        fs::<span class="fn">remove</span>(backupFiles.<span class="fn">front</span>().<span class="fn">path</span>());</span></div>
-            <div class="line"><span class="line-num">50</span><span class="line-content">        backupFiles.<span class="fn">erase</span>(backupFiles.<span class="fn">begin</span>());</span></div>
-            <div class="line"><span class="line-num">51</span><span class="line-content">    }</span></div>
-            <div class="line"><span class="line-num">52</span><span class="line-content">}</span></div>
+            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="cm">// Creates a timestamped backup of records.psv after every create/update</span></span></div>
+            <div class="line"><span class="line-num">2</span><span class="line-content"><span class="kw">void</span> <span class="type">FileManager</span>::<span class="fn">backup</span>() {</span></div>
+            <div class="line"><span class="line-num">3</span><span class="line-content">    <span class="cm">// Only proceed if the main database file exists</span></span></div>
+            <div class="line"><span class="line-num">4</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(db_file_path)) {</span></div>
+            <div class="line"><span class="line-num">5</span><span class="line-content">        <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">6</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">7</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">8</span><span class="line-content">    <span class="cm">// Define backup folder path and create it if missing</span></span></div>
+            <div class="line"><span class="line-num">9</span><span class="line-content">    <span class="kw">const</span> <span class="type">std::string</span> backup_folder <span class="op">=</span> db_folder <span class="op">+</span> <span class="str">"/backup"</span>;</span></div>
+            <div class="line"><span class="line-num">10</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(backup_folder)) {</span></div>
+            <div class="line"><span class="line-num">11</span><span class="line-content">        fs::<span class="fn">create_directories</span>(backup_folder);</span></div>
+            <div class="line"><span class="line-num">12</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">13</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">14</span><span class="line-content">    <span class="cm">// Get current system time for the backup filename</span></span></div>
+            <div class="line"><span class="line-num">15</span><span class="line-content">    <span class="kw">const</span> <span class="kw">auto</span> now <span class="op">=</span> std::<span class="fn">chrono::system_clock::now</span>();</span></div>
+            <div class="line"><span class="line-num">16</span><span class="line-content">    <span class="kw">const</span> std::time_t time <span class="op">=</span> std::<span class="fn">chrono::system_clock::to_time_t</span>(now);</span></div>
+            <div class="line"><span class="line-num">17</span><span class="line-content">    <span class="type">std::tm</span> localTime{};</span></div>
+            <div class="line"><span class="line-num">18</span><span class="line-content"><span class="pp">#ifdef _WIN32</span></span></div>
+            <div class="line"><span class="line-num">19</span><span class="line-content">    <span class="cm">// Windows: use localtime_s (thread-safe)</span></span></div>
+            <div class="line"><span class="line-num">20</span><span class="line-content">    <span class="fn">localtime_s</span>(<span class="op">&amp;</span>localTime, <span class="op">&amp;</span>time);</span></div>
+            <div class="line"><span class="line-num">21</span><span class="line-content"><span class="pp">#else</span></span></div>
+            <div class="line"><span class="line-num">22</span><span class="line-content">    <span class="cm">// POSIX: use localtime_r (thread-safe)</span></span></div>
+            <div class="line"><span class="line-num">23</span><span class="line-content">    <span class="fn">localtime_r</span>(<span class="op">&amp;</span>time, <span class="op">&amp;</span>localTime);</span></div>
+            <div class="line"><span class="line-num">24</span><span class="line-content"><span class="pp">#endif</span></span></div>
+            <div class="line"><span class="line-num">25</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">26</span><span class="line-content">    <span class="cm">// Format timestamp as YYYY-MM-DD_HH-MM-SS</span></span></div>
+            <div class="line"><span class="line-num">27</span><span class="line-content">    <span class="type">std::ostringstream</span> timestamp;</span></div>
+            <div class="line"><span class="line-num">28</span><span class="line-content">    timestamp <span class="op">&lt;&lt;</span> std::<span class="fn">put_time</span>(<span class="op">&amp;</span>localTime, <span class="str">"%Y-%m-%d_%H-%M-%S"</span>);</span></div>
+            <div class="line"><span class="line-num">29</span><span class="line-content">    <span class="cm">// Build the backup file path</span></span></div>
+            <div class="line"><span class="line-num">30</span><span class="line-content">    <span class="kw">const</span> <span class="type">std::string</span> backup_path <span class="op">=</span></span></div>
+            <div class="line"><span class="line-num">31</span><span class="line-content">        backup_folder <span class="op">+</span> <span class="str">"/records_"</span> <span class="op">+</span> timestamp.<span class="fn">str</span>() <span class="op">+</span> <span class="str">".psv"</span>;</span></div>
+            <div class="line"><span class="line-num">32</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">33</span><span class="line-content">    <span class="cm">// Attempt to copy the current database file to the backup location</span></span></div>
+            <div class="line"><span class="line-num">34</span><span class="line-content">    <span class="kw">try</span> {</span></div>
+            <div class="line"><span class="line-num">35</span><span class="line-content">        fs::<span class="fn">copy_file</span>(db_file_path, backup_path,</span></div>
+            <div class="line"><span class="line-num">36</span><span class="line-content">                      fs::<span class="fn">copy_options::overwrite_existing</span>);</span></div>
+            <div class="line"><span class="line-num">37</span><span class="line-content">    } <span class="kw">catch</span> (<span class="kw">const</span> fs::<span class="type">filesystem_error</span> <span class="op">&amp;</span>) {</span></div>
+            <div class="line"><span class="line-num">38</span><span class="line-content">        <span class="cm">// If copy fails (e.g., disk full), simply abort backup</span></span></div>
+            <div class="line"><span class="line-num">39</span><span class="line-content">        <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">40</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">41</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">42</span><span class="line-content">    <span class="cm">// Collect all existing backup files (.psv) in the backup folder</span></span></div>
+            <div class="line"><span class="line-num">43</span><span class="line-content">    <span class="type">std::vector</span><span class="op">&lt;</span>fs::<span class="type">directory_entry</span><span class="op">&gt;</span> backupFiles;</span></div>
+            <div class="line"><span class="line-num">44</span><span class="line-content">    <span class="kw">for</span> (<span class="kw">const auto</span> <span class="op">&amp;</span>entry : fs::<span class="fn">directory_iterator</span>(backup_folder)) {</span></div>
+            <div class="line"><span class="line-num">45</span><span class="line-content">        <span class="kw">if</span> (entry.<span class="fn">is_regular_file</span>() <span class="op">&amp;&amp;</span> entry.<span class="fn">path</span>().<span class="fn">extension</span>() <span class="op">==</span> <span class="str">".psv"</span>) {</span></div>
+            <div class="line"><span class="line-num">46</span><span class="line-content">            backupFiles.<span class="fn">push_back</span>(entry);</span></div>
+            <div class="line"><span class="line-num">47</span><span class="line-content">        }</span></div>
+            <div class="line"><span class="line-num">48</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">49</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">50</span><span class="line-content">    <span class="cm">// If we have 3 or fewer backups, no cleanup needed</span></span></div>
+            <div class="line"><span class="line-num">51</span><span class="line-content">    <span class="kw">if</span> (backupFiles.<span class="fn">size</span>() <span class="op">&lt;=</span> <span class="num">3</span>) {</span></div>
+            <div class="line"><span class="line-num">52</span><span class="line-content">        <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">53</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">54</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">55</span><span class="line-content">    <span class="cm">// Sort backups by last write time (oldest first)</span></span></div>
+            <div class="line"><span class="line-num">56</span><span class="line-content">    std::<span class="fn">sort</span>(backupFiles.<span class="fn">begin</span>(), backupFiles.<span class="fn">end</span>(),</span></div>
+            <div class="line"><span class="line-num">57</span><span class="line-content">              [](<span class="kw">const</span> fs::<span class="type">directory_entry</span> <span class="op">&amp;</span>a, <span class="kw">const</span> fs::<span class="type">directory_entry</span> <span class="op">&amp;</span>b) {</span></div>
+            <div class="line"><span class="line-num">58</span><span class="line-content">                  <span class="kw">return</span> fs::<span class="fn">last_write_time</span>(a) <span class="op">&lt;</span> fs::<span class="fn">last_write_time</span>(b);</span></div>
+            <div class="line"><span class="line-num">59</span><span class="line-content">              });</span></div>
+            <div class="line"><span class="line-num">60</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">61</span><span class="line-content">    <span class="cm">// Delete the oldest backups until only 3 remain</span></span></div>
+            <div class="line"><span class="line-num">62</span><span class="line-content">    <span class="kw">while</span> (backupFiles.<span class="fn">size</span>() <span class="op">&gt;</span> <span class="num">3</span>) {</span></div>
+            <div class="line"><span class="line-num">63</span><span class="line-content">        fs::<span class="fn">remove</span>(backupFiles.<span class="fn">front</span>().<span class="fn">path</span>());</span></div>
+            <div class="line"><span class="line-num">64</span><span class="line-content">        backupFiles.<span class="fn">erase</span>(backupFiles.<span class="fn">begin</span>());</span></div>
+            <div class="line"><span class="line-num">65</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">66</span><span class="line-content">}</span></div>
           </div>
         </div>
         <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
