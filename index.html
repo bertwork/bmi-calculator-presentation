@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BMI Calculator System — Final Project Presentation</title>
   <meta name="description" content="Interactive presentation for the BMI Calculator System, a C++17 console application — Final Project for Computer Programming 2.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+<base target="_blank">
 </head>
 <body>
 
@@ -70,9 +72,10 @@
         A console-based C++17 application that calculates Body Mass Index, classifies results using WHO guidelines, and stores user records in a local PSV database.
       </p>
       <div class="title-meta fade-up stagger-4">
-        <span>📐 C++17</span>
-        <span>🏥 WHO Classification</span>
-        <span>💾 PSV Persistence</span>
+        <span><i class="fas fa-chart-line"></i> C++17</span>
+        <span><i class="fas fa-heartbeat"></i> WHO Classification</span>
+        <span><i class="fas fa-database"></i> PSV Persistence</span>
+        <span class="badge" style="background: var(--accent-dim); border-color: var(--accent); padding: 0.2rem 0.8rem;"><i class="fab fa-cplusplus"></i> Made with C++</span>
       </div>
     </div>
   </section>
@@ -132,47 +135,47 @@
 
       <div class="card-grid card-grid-3 mt-3">
         <div class="card fade-up stagger-1">
-          <span class="card-icon">⚡</span>
+          <span class="card-icon"><i class="fas fa-bolt"></i></span>
           <p class="card-title">Quick BMI</p>
           <p class="card-desc">Calculate BMI without saving — anonymous profile, instant result.</p>
         </div>
         <div class="card fade-up stagger-2">
-          <span class="card-icon">💾</span>
+          <span class="card-icon"><i class="fas fa-floppy-disk"></i></span>
           <p class="card-title">Save Record</p>
           <p class="card-desc">Store name, gender, age, height, weight, and classification. Warns on duplicate names.</p>
         </div>
         <div class="card fade-up stagger-3">
-          <span class="card-icon">📋</span>
+          <span class="card-icon"><i class="fas fa-list"></i></span>
           <p class="card-title">View Records</p>
           <p class="card-desc">List all saved entries with optional sort by BMI, name, or age. Includes summary stats.</p>
         </div>
         <div class="card fade-up stagger-4">
-          <span class="card-icon">🔍</span>
+          <span class="card-icon"><i class="fas fa-magnifying-glass"></i></span>
           <p class="card-title">Search</p>
           <p class="card-desc">Find records by partial name with case-insensitive matching.</p>
         </div>
         <div class="card fade-up stagger-5">
-          <span class="card-icon">🗑️</span>
+          <span class="card-icon"><i class="fas fa-trash-can"></i></span>
           <p class="card-title">Delete</p>
           <p class="card-desc">Remove a record with confirmation prompt to prevent accidental deletion.</p>
         </div>
         <div class="card fade-up stagger-6">
-          <span class="card-icon">✏️</span>
+          <span class="card-icon"><i class="fas fa-pen-to-square"></i></span>
           <p class="card-title">Edit</p>
           <p class="card-desc">Update one or more fields on a saved record. BMI is recalculated on save.</p>
         </div>
         <div class="card fade-up stagger-7">
-          <span class="card-icon">📏</span>
+          <span class="card-icon"><i class="fas fa-ruler-combined"></i></span>
           <p class="card-title">Unit Support</p>
           <p class="card-desc">Centimeters or feet for height, kilograms or pounds for weight.</p>
         </div>
         <div class="card fade-up stagger-7">
-          <span class="card-icon">🏥</span>
+          <span class="card-icon"><i class="fas fa-hospital"></i></span>
           <p class="card-title">WHO Classification</p>
           <p class="card-desc">Six categories with personalized advice and risk messages.</p>
         </div>
         <div class="card fade-up stagger-7">
-          <span class="card-icon">📦</span>
+          <span class="card-icon"><i class="fas fa-box-archive"></i></span>
           <p class="card-title">Data Limit</p>
           <p class="card-desc">Supports up to 500 records in the local PSV database.</p>
         </div>
@@ -435,7 +438,7 @@
             <h3>BMIResult (struct)</h3>
             <div class="source-panel">
             <div class="source-panel-header">
-              <span class="source-panel-icon">📄</span>
+              <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
               <span class="source-panel-filename">headers/bmi_service.h</span>
               <span class="source-panel-tag">Struct</span>
             </div>
@@ -467,7 +470,7 @@
             <h3>How BMIResult is Used</h3>
             <div class="source-panel">
               <div class="source-panel-header">
-                <span class="source-panel-icon">📄</span>
+                <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
                 <span class="source-panel-filename">src/bmi_service.cpp</span>
                 <span class="source-panel-tag">Classification</span>
               </div>
@@ -607,7 +610,7 @@
             <h3>Source Code — Creating &amp; Storing a Record</h3>
             <div class="source-panel">
               <div class="source-panel-header">
-                <span class="source-panel-icon">📄</span>
+                <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
                 <span class="source-panel-filename">src/file_manager.cpp</span>
                 <span class="source-panel-tag">unique_ptr</span>
               </div>
@@ -692,7 +695,7 @@
             <h3>Reading Records — Non‑owning Pointers</h3>
             <div class="source-panel">
               <div class="source-panel-header">
-                <span class="source-panel-icon">📄</span>
+                <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
                 <span class="source-panel-filename">src/file_manager.cpp</span>
                 <span class="source-panel-tag">raw pointer access</span>
               </div>
@@ -848,7 +851,7 @@
         <h3>Source Code — Reading Records from PSV</h3>
         <div class="source-panel">
           <div class="source-panel-header">
-            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
             <span class="source-panel-filename">src/file_manager.cpp</span>
             <span class="source-panel-tag">Read</span>
           </div>
@@ -880,7 +883,7 @@
         <h3>Source Code — Writing Records to PSV</h3>
         <div class="source-panel">
           <div class="source-panel-header">
-            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
             <span class="source-panel-filename">src/file_manager.cpp</span>
             <span class="source-panel-tag">Write</span>
           </div>
@@ -908,7 +911,7 @@
         <h3>Source Code — PSV Serialization (User)</h3>
         <div class="source-panel">
           <div class="source-panel-header">
-            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
             <span class="source-panel-filename">src/user.cpp</span>
             <span class="source-panel-tag">to_psv / from_psv</span>
           </div>
@@ -974,7 +977,7 @@
         <h3>Source Code — Automatic Backup System</h3>
         <div class="source-panel">
           <div class="source-panel-header">
-            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
             <span class="source-panel-filename">src/file_manager.cpp</span>
             <span class="source-panel-tag">backup()</span>
           </div>
@@ -1243,7 +1246,7 @@
                 <span class="terminal-dot"></span>
                 <span class="terminal-title">Save Record</span>
               </div>
-<div class="terminal-body"><span class="t-dim">Enter name:</span> <span class="t-bold">mandy</span>
+              <div class="terminal-body"><span class="t-dim">Enter name:</span> <span class="t-bold">mandy</span>
 <span class="t-dim">Select gender:</span>
 <span class="t-accent">[1]</span> Male  <span class="t-accent">[2]</span> Female  <span class="t-accent">[3]</span> Prefer not to say
 <span class="t-dim">Enter gender option (1-3):</span> <span class="t-bold">2</span>
@@ -1369,7 +1372,7 @@
         <h3>Source Code — Construction Phase</h3>
         <div class="source-panel">
           <div class="source-panel-header">
-            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
             <span class="source-panel-filename">app.cpp</span>
             <span class="source-panel-tag">constructor</span>
           </div>
@@ -1383,7 +1386,7 @@
 
         <div class="source-panel mt-3">
           <div class="source-panel-header">
-            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
             <span class="source-panel-filename">file_manager.cpp</span>
             <span class="source-panel-tag">constructor + init</span>
           </div>
@@ -1411,7 +1414,7 @@
         <h3>Source Code — Main Loop</h3>
         <div class="source-panel">
           <div class="source-panel-header">
-            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-icon"><i class="fas fa-file-code"></i></span>
             <span class="source-panel-filename">app.cpp</span>
             <span class="source-panel-tag">run()</span>
           </div>
@@ -1456,7 +1459,7 @@
         BMI Calculator System — Final Project for Computer Programming 2
       </p>
       <a href="https://github.com/bertwork/bmi-calculator" target="_blank" rel="noopener" class="repo-link fade-up stagger-3">
-        ⭐ View on GitHub
+        <i class="fas fa-star"></i> View on GitHub
       </a>
       <div class="mt-4 fade-up stagger-4">
         <p class="text-xs text-dim">Use ← → arrow keys or scroll to navigate slides</p>
