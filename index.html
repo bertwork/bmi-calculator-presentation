@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator System — Final Project Presentation</title>
+  <meta name="description" content="Interactive presentation for the BMI Calculator System, a C++17 console application — Final Project for Computer Programming 2.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Top Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand"><span>BMI</span> Calculator</div>
+    <ul class="nav-links">
+      <li><a href="#title">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#tech">Tech</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#dependencies">Modules</a></li>
+      <li><a href="#classes">Classes</a></li>
+      <li><a href="#pointers">Pointers</a></li>
+      <li><a href="#fileio">File I/O</a></li>
+      <li><a href="#bmi-classification">BMI</a></li>
+      <li><a href="#ui-flow">UI Flow</a></li>
+      <li><a href="#program-flow">Flow</a></li>
+      <li><a href="#thankyou">End</a></li>
+    </ul>
+  </nav>
+
+  <!-- Side Dot Navigation -->
+  <nav class="dot-nav" aria-label="Slide navigation">
+    <a href="#title"><span class="dot-tooltip">Title</span></a>
+    <a href="#about"><span class="dot-tooltip">About</span></a>
+    <a href="#features"><span class="dot-tooltip">Features</span></a>
+    <a href="#tech"><span class="dot-tooltip">Tech Stack</span></a>
+    <a href="#architecture"><span class="dot-tooltip">Architecture</span></a>
+    <a href="#dependencies"><span class="dot-tooltip">Modules</span></a>
+    <a href="#classes"><span class="dot-tooltip">Classes</span></a>
+    <a href="#pointers"><span class="dot-tooltip">Pointers</span></a>
+    <a href="#fileio"><span class="dot-tooltip">File I/O</span></a>
+    <a href="#bmi-classification"><span class="dot-tooltip">BMI Scale</span></a>
+    <a href="#ui-flow"><span class="dot-tooltip">UI Flow</span></a>
+    <a href="#program-flow"><span class="dot-tooltip">Program Flow</span></a>
+    <a href="#thankyou"><span class="dot-tooltip">Thank You</span></a>
+  </nav>
+
+  <!-- ============================================================
+       SLIDE 1: TITLE
+       ============================================================ -->
+  <section class="slide title-slide" id="title">
+    <div class="slide-inner">
+      <div class="fade-up">
+        <div class="bmi-gauge">
+          <div class="gauge-ring">
+            <span class="gauge-value" data-target="22.5">0.0</span>
+            <span class="gauge-label">BMI</span>
+          </div>
+        </div>
+      </div>
+      <p class="title-course fade-up stagger-1">Computer Programming 2 — Final Project</p>
+      <h1 class="title-main fade-up stagger-2">
+        <span class="accent-word">BMI</span> Calculator<br>System
+      </h1>
+      <p class="title-desc fade-up stagger-3">
+        A console-based C++17 application that calculates Body Mass Index, classifies results using WHO guidelines, and stores user records in a local PSV database.
+      </p>
+      <div class="title-meta fade-up stagger-4">
+        <span>📐 C++17</span>
+        <span>🏥 WHO Classification</span>
+        <span>💾 PSV Persistence</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 2: ABOUT
+       ============================================================ -->
+  <section class="slide" id="about">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">About the Project</p>
+      <h2 class="slide-title fade-up stagger-1">What It Does & Why</h2>
+      <p class="slide-subtitle fade-up stagger-2">
+        This system automates a common health metric workflow: collect height and weight, compute BMI, assign a standardized category with health guidance, and optionally save results for later review.
+      </p>
+
+      <div class="divider fade-up stagger-3"></div>
+
+      <div class="two-col mt-3">
+        <div class="fade-up stagger-3">
+          <h3>Problem Statement</h3>
+          <p class="text-sm text-dim">
+            Manual BMI calculation and record-keeping are error-prone and inconsistent. This system automates the formula, applies standardized classification rules, validates user input, and persists records so users can track measurements over time without a full database server.
+          </p>
+        </div>
+        <div class="fade-up stagger-4">
+          <h3>Target Users</h3>
+          <div class="card-grid" style="gap:0.5rem;">
+            <div class="card" style="padding:0.8rem 1rem;">
+              <p class="text-sm"><strong>Individuals</strong> — monitoring personal health metrics</p>
+            </div>
+            <div class="card" style="padding:0.8rem 1rem;">
+              <p class="text-sm"><strong>Students</strong> — learning object-oriented design in C++</p>
+            </div>
+            <div class="card" style="padding:0.8rem 1rem;">
+              <p class="text-sm"><strong>Educators</strong> — demonstrating introductory programming concepts</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 fade-up stagger-5">
+        <h3>BMI Formula</h3>
+        <div class="code-block" style="text-align:center; font-size:1.1rem; padding:1.5rem;">
+          <span class="fn">BMI</span> = <span class="type">weight</span> (<span class="str">kg</span>) / [<span class="type">height</span> (<span class="str">m</span>)]²
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 3: FEATURES
+       ============================================================ -->
+  <section class="slide" id="features">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">Features</p>
+      <h2 class="slide-title fade-up stagger-1">What It Can Do</h2>
+
+      <div class="card-grid card-grid-3 mt-3">
+        <div class="card fade-up stagger-1">
+          <span class="card-icon">⚡</span>
+          <p class="card-title">Quick BMI</p>
+          <p class="card-desc">Calculate BMI without saving — anonymous profile, instant result.</p>
+        </div>
+        <div class="card fade-up stagger-2">
+          <span class="card-icon">💾</span>
+          <p class="card-title">Save Record</p>
+          <p class="card-desc">Store name, gender, age, height, weight, and classification. Warns on duplicate names.</p>
+        </div>
+        <div class="card fade-up stagger-3">
+          <span class="card-icon">📋</span>
+          <p class="card-title">View Records</p>
+          <p class="card-desc">List all saved entries with optional sort by BMI, name, or age. Includes summary stats.</p>
+        </div>
+        <div class="card fade-up stagger-4">
+          <span class="card-icon">🔍</span>
+          <p class="card-title">Search</p>
+          <p class="card-desc">Find records by partial name with case-insensitive matching.</p>
+        </div>
+        <div class="card fade-up stagger-5">
+          <span class="card-icon">🗑️</span>
+          <p class="card-title">Delete</p>
+          <p class="card-desc">Remove a record with confirmation prompt to prevent accidental deletion.</p>
+        </div>
+        <div class="card fade-up stagger-6">
+          <span class="card-icon">✏️</span>
+          <p class="card-title">Edit</p>
+          <p class="card-desc">Update one or more fields on a saved record. BMI is recalculated on save.</p>
+        </div>
+        <div class="card fade-up stagger-7">
+          <span class="card-icon">📏</span>
+          <p class="card-title">Unit Support</p>
+          <p class="card-desc">Centimeters or feet for height, kilograms or pounds for weight.</p>
+        </div>
+        <div class="card fade-up stagger-7">
+          <span class="card-icon">🏥</span>
+          <p class="card-title">WHO Classification</p>
+          <p class="card-desc">Six categories with personalized advice and risk messages.</p>
+        </div>
+        <div class="card fade-up stagger-7">
+          <span class="card-icon">📦</span>
+          <p class="card-title">Data Limit</p>
+          <p class="card-desc">Supports up to 500 records in the local PSV database.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 4: TECHNOLOGY STACK
+       ============================================================ -->
+  <section class="slide" id="tech">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">Technology Stack</p>
+      <h2 class="slide-title fade-up stagger-1">Built With</h2>
+
+      <div class="table-wrapper mt-3 fade-up stagger-2">
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Choice</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Language</td><td>C++17</td><td>Object-oriented programming with modern features</td></tr>
+            <tr><td>Interface</td><td>Console (text-based menu)</td><td>User-driven menu interaction</td></tr>
+            <tr><td>Persistence</td><td>PSV file</td><td>Pipe-separated values at database/records.psv</td></tr>
+            <tr><td>Build Tool</td><td>g++ (MinGW / MSYS2)</td><td>Compilation on Windows</td></tr>
+            <tr><td>IDE Support</td><td>Visual Studio Code</td><td>Tasks, launch configs, IntelliSense</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tech-badges fade-up stagger-3">
+        <span class="badge"><span class="badge-dot"></span> C++17</span>
+        <span class="badge"><span class="badge-dot"></span> OOP</span>
+        <span class="badge"><span class="badge-dot"></span> Console App</span>
+        <span class="badge"><span class="badge-dot"></span> PSV Database</span>
+        <span class="badge"><span class="badge-dot"></span> File I/O</span>
+        <span class="badge"><span class="badge-dot"></span> g++ / MinGW</span>
+        <span class="badge"><span class="badge-dot"></span> VS Code</span>
+      </div>
+
+      <div class="mt-4 fade-up stagger-4">
+        <h3>Course Concepts Applied</h3>
+        <div class="card-grid card-grid-2 mt-2">
+          <div class="card" style="padding:0.8rem 1rem;">
+            <p class="text-sm">🔹 Object-oriented programming (classes, encapsulation, composition)</p>
+          </div>
+          <div class="card" style="padding:0.8rem 1rem;">
+            <p class="text-sm">🔹 Control structures and menu-driven program flow</p>
+          </div>
+          <div class="card" style="padding:0.8rem 1rem;">
+            <p class="text-sm">🔹 Functions and modular code across multiple source files</p>
+          </div>
+          <div class="card" style="padding:0.8rem 1rem;">
+            <p class="text-sm">🔹 File input/output (PSV persistence)</p>
+          </div>
+          <div class="card" style="padding:0.8rem 1rem;">
+            <p class="text-sm">🔹 Input validation and error handling</p>
+          </div>
+          <div class="card" style="padding:0.8rem 1rem;">
+            <p class="text-sm">🔹 Practical application from design through documentation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 5: SYSTEM ARCHITECTURE
+       ============================================================ -->
+  <section class="slide" id="architecture">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">System Architecture</p>
+      <h2 class="slide-title fade-up stagger-1">Layered Design</h2>
+      <p class="slide-subtitle fade-up stagger-2">
+        Each layer has one job, and control flows downward from entry → application → specialized modules.
+      </p>
+
+      <div class="arch-diagram mt-3 fade-up stagger-3">
+        <div class="arch-layer">
+          <span class="arch-layer-label">L1 · Entry</span>
+          <div class="arch-layer-content">
+            <span class="arch-component">main.cpp</span>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ creates App, calls run()</div>
+        <div class="arch-layer">
+          <span class="arch-layer-label">L2 · Application</span>
+          <div class="arch-layer-content">
+            <span class="arch-component">App</span>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ owns FileManager & UI</div>
+        <div class="arch-layer">
+          <span class="arch-layer-label">L3 · Presentation</span>
+          <div class="arch-layer-content">
+            <span class="arch-component">UI</span>
+            <span class="arch-component">getInput()</span>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ uses BMIService</div>
+        <div class="arch-layer">
+          <span class="arch-layer-label">L4 · Business</span>
+          <div class="arch-layer-content">
+            <span class="arch-component">BMIService</span>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ operates on User</div>
+        <div class="arch-layer">
+          <span class="arch-layer-label">L5 · Data Model</span>
+          <div class="arch-layer-content">
+            <span class="arch-component">User</span>
+            <span class="arch-component">to_psv() / from_psv()</span>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ read / write</div>
+        <div class="arch-layer">
+          <span class="arch-layer-label">L6 · Persistence</span>
+          <div class="arch-layer-content">
+            <span class="arch-component">FileManager</span>
+            <span class="arch-component">records.psv</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrapper mt-3 fade-up stagger-4">
+        <table>
+          <thead>
+            <tr><th>Layer</th><th>Component</th><th>Source Files</th><th>Primary Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Entry</td><td>main</td><td>main.cpp</td><td>Start program; create App; call run()</td></tr>
+            <tr><td>Application</td><td>App</td><td>app.h, app.cpp</td><td>Menu loop; route features to modules</td></tr>
+            <tr><td>Presentation</td><td>UI, getInput()</td><td>ui.h, ui.cpp, input_utility.h</td><td>Menus, prompts, validation, output</td></tr>
+            <tr><td>Business</td><td>BMIService</td><td>bmi_service.h, bmi_service.cpp</td><td>BMI math, WHO classification, units</td></tr>
+            <tr><td>Data Model</td><td>User</td><td>user.h, user.cpp</td><td>Record fields; PSV serialize/parse</td></tr>
+            <tr><td>Persistence</td><td>FileManager</td><td>file_manager.h, file_manager.cpp</td><td>In-memory records + records.psv</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 6: MODULE DEPENDENCIES
+       ============================================================ -->
+  <section class="slide" id="dependencies">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">Module Dependencies</p>
+      <h2 class="slide-title fade-up stagger-1">Who Calls Whom</h2>
+
+      <div class="dep-map fade-up stagger-2">
+        <!-- Top: main -->
+        <div class="dep-row">
+          <div class="dep-node">main.cpp</div>
+        </div>
+        <div class="dep-arrow">↓ <span class="dep-label">creates</span></div>
+
+        <!-- App -->
+        <div class="dep-row">
+          <div class="dep-node primary">App</div>
+        </div>
+        <div class="dep-arrow">↓ <span class="dep-label">owns</span> ↓</div>
+
+        <!-- FileManager & UI -->
+        <div class="dep-row">
+          <div class="dep-node">FileManager</div>
+          <div class="dep-node">UI</div>
+        </div>
+        <div class="dep-arrow">↓ <span class="dep-label">uses</span> ↓</div>
+
+        <!-- BMIService, User, getInput -->
+        <div class="dep-row">
+          <div class="dep-node">BMIService</div>
+          <div class="dep-node">User</div>
+          <div class="dep-node">getInput()</div>
+        </div>
+        <div class="dep-arrow">↓ <span class="dep-label">read / write</span></div>
+
+        <!-- PSV file -->
+        <div class="dep-row">
+          <div class="dep-node">records.psv</div>
+        </div>
+      </div>
+
+      <div class="mt-3 fade-up stagger-3">
+        <h3>Dependency Matrix</h3>
+        <div class="table-wrapper mt-2">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Caller →</th>
+                <th>UI</th>
+                <th>FileManager</th>
+                <th>BMIService</th>
+                <th>User</th>
+                <th>getInput()</th>
+                <th>records.psv</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>main</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>App</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td>—</td></tr>
+              <tr><td>UI</td><td>—</td><td>—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td>—</td></tr>
+              <tr><td>FileManager</td><td>—</td><td>—</td><td>—</td><td class="check">✓</td><td>—</td><td class="check">✓</td></tr>
+              <tr><td>BMIService</td><td>—</td><td>—</td><td>—</td><td class="check">✓</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-3 fade-up stagger-4">
+        <h3>Component Ownership</h3>
+        <div class="table-wrapper mt-2">
+          <table>
+            <thead>
+              <tr><th>Component</th><th>Owned By</th><th>Lifetime</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>App</td><td>main</td><td>Stack in main()</td><td>Single application controller</td></tr>
+              <tr><td>FileManager</td><td>App</td><td>Member of App</td><td>Loads PSV file on construct</td></tr>
+              <tr><td>UI</td><td>App</td><td>Member of App</td><td>Stateless display/input helpers</td></tr>
+              <tr><td>BMIService</td><td>—</td><td>N/A</td><td>No instances; static methods only</td></tr>
+              <tr><td>User records</td><td>FileManager</td><td>Heap (new/delete)</td><td>Stored in vector&lt;unique_ptr&lt;User&gt;&gt;</td></tr>
+              <tr><td>getInput()</td><td>—</td><td>N/A</td><td>Header-only template function</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 7: CLASSES & STRUCTS
+       ============================================================ -->
+  <section class="slide" id="classes">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">Classes & Structs</p>
+      <h2 class="slide-title fade-up stagger-1">Components Reference</h2>
+
+      <div class="two-col mt-3" style="gap:1rem;">
+        <div>
+          <div class="fade-up stagger-2">
+            <h3>Classes vs Struct</h3>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Keyword</th><th>Default Access</th><th>Use in Project</th></tr></thead>
+                <tbody>
+                  <tr><td>class</td><td>private</td><td>Types with behavior + hidden data</td></tr>
+                  <tr><td>struct</td><td>public</td><td>Simple data containers (BMIResult)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mt-3 fade-up stagger-3">
+            <h3>BMIResult (struct)</h3>
+            <div class="source-panel">
+              <div class="source-panel-header">
+                <span class="source-panel-icon">📄</span>
+                <span class="source-panel-filename">include/bmi_result.h</span>
+                <span class="source-panel-tag">Struct</span>
+              </div>
+              <div class="source-code">
+                <div class="line"><span class="line-num">1</span><span class="line-content"><span class="pp">#ifndef</span> BMI_RESULT_H</span></div>
+                <div class="line"><span class="line-num">2</span><span class="line-content"><span class="pp">#define</span> BMI_RESULT_H</span></div>
+                <div class="line"><span class="line-num">3</span><span class="line-content"><span class="pp">#include</span> <span class="str">&lt;string&gt;</span></span></div>
+                <div class="line"><span class="line-num">4</span><span class="line-content"></span></div>
+                <div class="line highlight"><span class="line-num">5</span><span class="line-content"><span class="kw">struct</span> <span class="type">BMIResult</span> {</span></div>
+                <div class="line highlight"><span class="line-num">6</span><span class="line-content">    <span class="type">std::string</span> category;</span></div>
+                <div class="line highlight"><span class="line-num">7</span><span class="line-content">    <span class="type">std::string</span> advice;</span></div>
+                <div class="line highlight"><span class="line-num">8</span><span class="line-content">    <span class="type">std::string</span> risk;</span></div>
+                <div class="line highlight"><span class="line-num">9</span><span class="line-content">};</span></div>
+                <div class="line"><span class="line-num">10</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">11</span><span class="line-content"><span class="pp">#endif</span></span></div>
+              </div>
+            </div>
+            <p class="text-sm text-dim mt-1">A lightweight container for three strings returned after BMI classification. No methods — only public fields. Uses <code class="text-mono text-accent">struct</code> (default public) instead of <code class="text-mono text-accent">class</code>.</p>
+          </div>
+
+          <div class="mt-3 fade-up stagger-4">
+            <h3>How BMIResult is Used</h3>
+            <div class="source-panel">
+              <div class="source-panel-header">
+                <span class="source-panel-icon">📄</span>
+                <span class="source-panel-filename">src/bmi_service.cpp</span>
+                <span class="source-panel-tag">Classification</span>
+              </div>
+              <div class="source-code">
+                <div class="line"><span class="line-num">1</span><span class="line-content"><span class="type">BMIResult</span> <span class="type">BMIService</span>::<span class="fn">classifyBMI</span>(<span class="kw">double</span> bmi) {</span></div>
+                <div class="line highlight"><span class="line-num">2</span><span class="line-content">    <span class="type">BMIResult</span> result;  <span class="cm">// struct — all fields public</span></span></div>
+                <div class="line"><span class="line-num">3</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">4</span><span class="line-content">    <span class="kw">if</span> (bmi <span class="op">&lt;</span> UNDERWEIGHT_THRESHOLD) {</span></div>
+                <div class="line highlight"><span class="line-num">5</span><span class="line-content">        result.category <span class="op">=</span> <span class="str">"Underweight"</span>;</span></div>
+                <div class="line highlight"><span class="line-num">6</span><span class="line-content">        result.advice <span class="op">=</span> <span class="str">"Increase caloric intake..."</span>;</span></div>
+                <div class="line highlight"><span class="line-num">7</span><span class="line-content">        result.risk <span class="op">=</span> <span class="str">"Malnutrition, osteoporosis..."</span>;</span></div>
+                <div class="line"><span class="line-num">8</span><span class="line-content">    } <span class="kw">else if</span> (bmi <span class="op">&lt;</span> NORMAL_WEIGHT_THRESHOLD) {</span></div>
+                <div class="line"><span class="line-num">9</span><span class="line-content">        result.category <span class="op">=</span> <span class="str">"Normal weight"</span>;</span></div>
+                <div class="line"><span class="line-num">10</span><span class="line-content">        <span class="cm">// ... more categories ...</span></span></div>
+                <div class="line"><span class="line-num">11</span><span class="line-content">    }</span></div>
+                <div class="line"><span class="line-num">12</span><span class="line-content">    <span class="kw">return</span> result;</span></div>
+                <div class="line"><span class="line-num">13</span><span class="line-content">}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-up stagger-3">
+          <h3>All Components</h3>
+          <div class="card-grid" style="gap:0.6rem;">
+            <div class="component-card">
+              <div class="component-header">
+                <span class="component-type">Class</span>
+                <span class="component-name">App</span>
+              </div>
+              <div class="component-body">
+                <p>Central controller. Owns FileManager and UI, runs main menu loop.</p>
+                <div class="component-files"><span class="file-tag">app.h</span><span class="file-tag">app.cpp</span></div>
+              </div>
+            </div>
+            <div class="component-card">
+              <div class="component-header">
+                <span class="component-type">Class</span>
+                <span class="component-name">User</span>
+              </div>
+              <div class="component-body">
+                <p>Data model with private fields + getters/setters. PSV serialize/parse.</p>
+                <div class="component-files"><span class="file-tag">user.h</span><span class="file-tag">user.cpp</span></div>
+              </div>
+            </div>
+            <div class="component-card">
+              <div class="component-header">
+                <span class="component-type">Class</span>
+                <span class="component-name">BMIService</span>
+              </div>
+              <div class="component-body">
+                <p>Static methods for BMI calculation, WHO classification, unit conversion.</p>
+                <div class="component-files"><span class="file-tag">bmi_service.h</span><span class="file-tag">bmi_service.cpp</span></div>
+              </div>
+            </div>
+            <div class="component-card">
+              <div class="component-header">
+                <span class="component-type">Class</span>
+                <span class="component-name">FileManager</span>
+              </div>
+              <div class="component-body">
+                <p>File I/O and in-memory record list. CRUD operations on records.psv.</p>
+                <div class="component-files"><span class="file-tag">file_manager.h</span><span class="file-tag">file_manager.cpp</span></div>
+              </div>
+            </div>
+            <div class="component-card">
+              <div class="component-header">
+                <span class="component-type">Class</span>
+                <span class="component-name">UI</span>
+              </div>
+              <div class="component-body">
+                <p>Console interface — menus, prompts, formatted output, pause screens.</p>
+                <div class="component-files"><span class="file-tag">ui.h</span><span class="file-tag">ui.cpp</span></div>
+              </div>
+            </div>
+            <div class="component-card">
+              <div class="component-header">
+                <span class="component-type">Template</span>
+                <span class="component-name">getInput()</span>
+              </div>
+              <div class="component-body">
+                <p>Header-only template for validated numeric input (int and double).</p>
+                <div class="component-files"><span class="file-tag">input_utility.h</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 8: SMART POINTERS & MEMORY
+       ============================================================ -->
+  <section class="slide" id="pointers">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">Smart Pointers & References</p>
+      <h2 class="slide-title fade-up stagger-1">Memory Management</h2>
+      <p class="slide-subtitle fade-up stagger-2">
+        The project uses <code class="text-mono text-accent">std::unique_ptr&lt;User&gt;</code> so heap-allocated records are freed automatically — no manual delete needed.
+      </p>
+
+      <div class="two-col mt-3">
+        <div>
+          <div class="fade-up stagger-3">
+            <h3>Smart Pointer Usage</h3>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Code Pattern</th><th>Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td class="text-mono">vector&lt;unique_ptr&lt;User&gt;&gt;</td><td>FileManager holds all saved records</td></tr>
+                  <tr><td class="text-mono">make_unique&lt;User&gt;(...)</td><td>Heap allocation on save/load</td></tr>
+                  <tr><td class="text-mono">push_back(std::move(...))</td><td>Transfer ownership into vector</td></tr>
+                  <tr><td class="text-mono">const User *record</td><td>Read-only access (non-owning)</td></tr>
+                  <tr><td class="text-mono">u.get()</td><td>Raw pointer from unique_ptr</td></tr>
+                  <tr><td class="text-mono">record-&gt;get_name()</td><td>Arrow operator access</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mt-3 fade-up stagger-4">
+            <h3>Reference vs Pointer</h3>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Syntax</th><th>Example</th><th>Meaning</th></tr></thead>
+                <tbody>
+                  <tr><td class="text-mono">User &amp;user</td><td>applyToUser(User &amp;)</td><td>Alias; must be valid</td></tr>
+                  <tr><td class="text-mono">double &amp;height</td><td>collectHeightWeight(...)</td><td>Output parameter</td></tr>
+                  <tr><td class="text-mono">const User &amp;</td><td>displayBMIResult(...)</td><td>Read-only, no copy</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mt-3 fade-up stagger-5">
+            <h3>Source Code — Creating &amp; Storing a Record</h3>
+            <div class="source-panel">
+              <div class="source-panel-header">
+                <span class="source-panel-icon">📄</span>
+                <span class="source-panel-filename">src/file_manager.cpp</span>
+                <span class="source-panel-tag">unique_ptr</span>
+              </div>
+              <div class="source-code">
+                <div class="line"><span class="line-num">1</span><span class="line-content"><span class="kw">bool</span> <span class="type">FileManager</span>::<span class="fn">create</span>(<span class="kw">const</span> <span class="type">User</span> <span class="op">&amp;</span>user) {</span></div>
+                <div class="line"><span class="line-num">2</span><span class="line-content">    <span class="kw">int</span> new_id <span class="op">=</span> <span class="fn">generate_id</span>();</span></div>
+                <div class="line"><span class="line-num">3</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">4</span><span class="line-content">    <span class="cm">// Heap-allocate via make_unique — no raw new/delete</span></span></div>
+                <div class="line highlight"><span class="line-num">5</span><span class="line-content">    <span class="kw">auto</span> stored <span class="op">=</span> std::<span class="fn">make_unique</span><span class="op">&lt;</span><span class="type">User</span><span class="op">&gt;</span>(user);</span></div>
+                <div class="line highlight"><span class="line-num">6</span><span class="line-content">    stored<span class="op">-&gt;</span><span class="fn">set_id</span>(new_id);</span></div>
+                <div class="line"><span class="line-num">7</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">8</span><span class="line-content">    <span class="cm">// Transfer ownership into the vector</span></span></div>
+                <div class="line highlight"><span class="line-num">9</span><span class="line-content">    records.<span class="fn">push_back</span>(std::<span class="fn">move</span>(stored));</span></div>
+                <div class="line"><span class="line-num">10</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">11</span><span class="line-content">    <span class="fn">write_to_file</span>();  <span class="cm">// sync to disk</span></span></div>
+                <div class="line"><span class="line-num">12</span><span class="line-content">    <span class="fn">backup</span>();         <span class="cm">// create backup copy</span></span></div>
+                <div class="line"><span class="line-num">13</span><span class="line-content">    <span class="kw">return true</span>;</span></div>
+                <div class="line"><span class="line-num">14</span><span class="line-content">}</span></div>
+              </div>
+            </div>
+            <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
+              <strong class="text-accent">Key:</strong> <code class="text-mono">make_unique</code> allocates on the heap → <code class="text-mono">std::move</code> transfers ownership into the vector → <code class="text-mono">unique_ptr</code> auto-frees on destruction.
+            </p>
+          </div>
+        </div>
+
+        <div class="fade-up stagger-4">
+          <h3>Pointer Lifecycle of a Saved Record</h3>
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <span class="flow-step-num">1</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">App::saveRecord()</p>
+                <p class="flow-step-code">User user; // stack object (temporary)</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">2</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">FileManager::create(const User &amp;)</p>
+                <p class="flow-step-code">auto stored = make_unique&lt;User&gt;(user); // heap copy</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">3</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">Assign ID &amp; Move</p>
+                <p class="flow-step-code">stored-&gt;set_id(...); records.push_back(std::move(stored));</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">4</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">Write to Disk</p>
+                <p class="flow-step-code">write_to_file(); // syncs to records.psv</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">5</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">Read for Display</p>
+                <p class="flow-step-code">read_all() → for (const User *record : records)</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">6</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">Automatic Cleanup</p>
+                <p class="flow-step-code">~FileManager → unique_ptrs free heap memory</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 9: FILE HANDLING & PSV
+       ============================================================ -->
+  <section class="slide" id="fileio">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">File Handling</p>
+      <h2 class="slide-title fade-up stagger-1">PSV Persistence</h2>
+      <p class="slide-subtitle fade-up stagger-2">
+        All persistent data is stored in <code class="text-mono text-accent">database/records.psv</code>. The FileManager handles every file operation.
+      </p>
+
+      <div class="two-col mt-3">
+        <div>
+          <div class="fade-up stagger-3">
+            <h3>Libraries & Types</h3>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Include / Type</th><th>Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td class="text-mono">&lt;fstream&gt;</td><td>ifstream (read), ofstream (write)</td></tr>
+                  <tr><td class="text-mono">&lt;filesystem&gt;</td><td>exists, create_directories</td></tr>
+                  <tr><td class="text-mono">std::getline()</td><td>Read one line at a time</td></tr>
+                  <tr><td class="text-mono">file &lt;&lt; data</td><td>Write text to file</td></tr>
+                  <tr><td class="text-mono">file.is_open()</td><td>Check if open succeeded</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mt-3 fade-up stagger-4">
+            <h3>File Operations Map</h3>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Function</th><th>File Mode</th><th>What It Does</th></tr></thead>
+                <tbody>
+                  <tr><td>init_database()</td><td>Create</td><td>Creates folder/file + header if missing</td></tr>
+                  <tr><td>read_from_file()</td><td>Read</td><td>Loads records into vector on startup</td></tr>
+                  <tr><td>write_to_file()</td><td>Write</td><td>Rewrites entire PSV from memory</td></tr>
+                  <tr><td>create()</td><td>Write + Backup</td><td>After adding record</td></tr>
+                  <tr><td>update()</td><td>Write + Backup</td><td>After replacing record by ID</td></tr>
+                  <tr><td>delete_by_id()</td><td>Write</td><td>After removing record</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="fade-up stagger-3">
+            <h3>Reading a Record from PSV</h3>
+            <div class="flow-diagram">
+              <div class="flow-step">
+                <span class="flow-step-num">1</span>
+                <div class="flow-step-content">
+                  <p class="flow-step-title">Open File</p>
+                  <p class="flow-step-code">Open records.psv with ifstream</p>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">2</span>
+                <div class="flow-step-content">
+                  <p class="flow-step-title">Skip Header</p>
+                  <p class="flow-step-code">Read first line → skip (header row)</p>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">3</span>
+                <div class="flow-step-content">
+                  <p class="flow-step-title">Parse Each Line</p>
+                  <p class="flow-step-code">User::from_psv(line) → make_unique → push_back</p>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">4</span>
+                <div class="flow-step-content">
+                  <p class="flow-step-title">Close</p>
+                  <p class="flow-step-code">ifstream destructor closes file</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 fade-up stagger-4">
+            <h3>Saving After Create/Update/Delete</h3>
+            <div class="flow-diagram">
+              <div class="flow-step">
+                <span class="flow-step-num">1</span>
+                <div class="flow-step-content">
+                  <p class="flow-step-title">Open & Truncate</p>
+                  <p class="flow-step-code">Open records.psv with ofstream (truncates)</p>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">2</span>
+                <div class="flow-step-content">
+                  <p class="flow-step-title">Write Header</p>
+                  <p class="flow-step-code">Write column names as first row</p>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">3</span>
+                <div class="flow-step-content">
+                  <p class="flow-step-title">Write Data</p>
+                  <p class="flow-step-code">for each record: file &lt;&lt; user-&gt;to_psv()</p>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">4</span>
+                <div class="flow-step-content">
+                  <p class="flow-step-title">Backup (create/update)</p>
+                  <p class="flow-step-code">backup() copies to database/backup/</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3 fade-up stagger-5">
+        <p class="text-sm text-dim" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
+          <strong class="text-accent">Note:</strong> The program keeps data <strong>in memory</strong> (vector&lt;unique_ptr&lt;User&gt;&gt;) while running and <strong>syncs to disk</strong> on every create, update, or delete.
+        </p>
+      </div>
+
+      <div class="mt-3 fade-up stagger-6">
+        <h3>Source Code — Reading Records from PSV</h3>
+        <div class="source-panel">
+          <div class="source-panel-header">
+            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-filename">src/file_manager.cpp</span>
+            <span class="source-panel-tag">Read</span>
+          </div>
+          <div class="source-code">
+            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="kw">void</span> <span class="type">FileManager</span>::<span class="fn">read_from_file</span>() {</span></div>
+            <div class="line"><span class="line-num">2</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(db_file_path)) <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">3</span><span class="line-content"></span></div>
+            <div class="line highlight"><span class="line-num">4</span><span class="line-content">    <span class="type">std::ifstream</span> file(db_file_path);</span></div>
+            <div class="line"><span class="line-num">5</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>file.<span class="fn">is_open</span>()) <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">6</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">7</span><span class="line-content">    <span class="type">std::string</span> line;</span></div>
+            <div class="line"><span class="line-num">8</span><span class="line-content">    <span class="kw">bool</span> isHeader <span class="op">=</span> <span class="kw">true</span>;</span></div>
+            <div class="line"><span class="line-num">9</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">10</span><span class="line-content">    <span class="kw">while</span> (std::<span class="fn">getline</span>(file, line)) {</span></div>
+            <div class="line"><span class="line-num">11</span><span class="line-content">        <span class="kw">if</span> (isHeader) { isHeader <span class="op">=</span> <span class="kw">false</span>; <span class="kw">continue</span>; }</span></div>
+            <div class="line"><span class="line-num">12</span><span class="line-content">        <span class="kw">if</span> (line.<span class="fn">empty</span>()) <span class="kw">continue</span>;</span></div>
+            <div class="line"><span class="line-num">13</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">14</span><span class="line-content">        <span class="cm">// Parse PSV line → heap-allocate User → store in vector</span></span></div>
+            <div class="line highlight"><span class="line-num">15</span><span class="line-content">        records.<span class="fn">push_back</span>(</span></div>
+            <div class="line highlight"><span class="line-num">16</span><span class="line-content">            std::<span class="fn">make_unique</span><span class="op">&lt;</span><span class="type">User</span><span class="op">&gt;</span>(<span class="type">User</span>::<span class="fn">from_psv</span>(line))</span></div>
+            <div class="line highlight"><span class="line-num">17</span><span class="line-content">        );</span></div>
+            <div class="line"><span class="line-num">18</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">19</span><span class="line-content">}  <span class="cm">// ifstream destructor auto-closes the file</span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3 fade-up stagger-7">
+        <h3>Source Code — Writing Records to PSV</h3>
+        <div class="source-panel">
+          <div class="source-panel-header">
+            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-filename">src/file_manager.cpp</span>
+            <span class="source-panel-tag">Write</span>
+          </div>
+          <div class="source-code">
+            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="kw">void</span> <span class="type">FileManager</span>::<span class="fn">write_to_file</span>() {</span></div>
+            <div class="line highlight"><span class="line-num">2</span><span class="line-content">    <span class="type">std::ofstream</span> file(db_file_path);  <span class="cm">// truncates existing file</span></span></div>
+            <div class="line"><span class="line-num">3</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>file.<span class="fn">is_open</span>()) <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">4</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">5</span><span class="line-content">    <span class="cm">// Write PSV header row</span></span></div>
+            <div class="line highlight"><span class="line-num">6</span><span class="line-content">    file <span class="op">&lt;&lt;</span> <span class="str">"id|name|gender|age|height|weight|bmi|category|advice|risk\n"</span>;</span></div>
+            <div class="line"><span class="line-num">7</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">8</span><span class="line-content">    <span class="cm">// Write each record via User::to_psv()</span></span></div>
+            <div class="line highlight"><span class="line-num">9</span><span class="line-content">    <span class="kw">for</span> (<span class="kw">const auto</span> <span class="op">&amp;</span>u : records) {</span></div>
+            <div class="line highlight"><span class="line-num">10</span><span class="line-content">        file <span class="op">&lt;&lt;</span> u<span class="op">-&gt;</span><span class="fn">to_psv</span>() <span class="op">&lt;&lt;</span> <span class="str">"\n"</span>;</span></div>
+            <div class="line highlight"><span class="line-num">11</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">12</span><span class="line-content">}  <span class="cm">// ofstream destructor auto-closes and flushes</span></span></div>
+          </div>
+        </div>
+        <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
+          <strong class="text-accent">Pattern:</strong> Every create, update, or delete calls <code class="text-mono">write_to_file()</code> to rewrite the full file from the in-memory vector. The <code class="text-mono">User::to_psv()</code> method serializes each record to a pipe-separated line.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 10: BMI CLASSIFICATION
+       ============================================================ -->
+  <section class="slide" id="bmi-classification">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">BMI Classification</p>
+      <h2 class="slide-title fade-up stagger-1">WHO Categories</h2>
+      <p class="slide-subtitle fade-up stagger-2">
+        Six categories based on World Health Organization BMI thresholds, each with tailored advice and risk assessment.
+      </p>
+
+      <div class="bmi-scale mt-3 fade-up stagger-3">
+        <div class="bmi-scale-segment seg-uw">&lt;18.5</div>
+        <div class="bmi-scale-segment seg-nw">18.5–24.9</div>
+        <div class="bmi-scale-segment seg-ow">25–29.9</div>
+        <div class="bmi-scale-segment seg-o1">30–34.9</div>
+        <div class="bmi-scale-segment seg-o2">35–39.9</div>
+        <div class="bmi-scale-segment seg-o3">≥40</div>
+      </div>
+      <div class="bmi-labels fade-up stagger-3">
+        <span>Underweight</span>
+        <span>Normal</span>
+        <span>Overweight</span>
+        <span>Obese I</span>
+        <span>Obese II</span>
+        <span>Obese III</span>
+      </div>
+
+      <div class="card-grid card-grid-2 fade-up stagger-4">
+        <div class="bmi-card cat-uw">
+          <div class="bmi-card-header">
+            <span class="bmi-card-cat">Underweight</span>
+            <span class="bmi-card-range">&lt; 18.5</span>
+          </div>
+          <p class="bmi-card-detail">
+            <strong>Advice:</strong> Increase caloric intake with nutritious foods.<br>
+            <strong>Risk:</strong> Malnutrition, osteoporosis, weakened immunity.
+          </p>
+        </div>
+        <div class="bmi-card cat-nw">
+          <div class="bmi-card-header">
+            <span class="bmi-card-cat">Normal Weight</span>
+            <span class="bmi-card-range">18.5 – 24.9</span>
+          </div>
+          <p class="bmi-card-detail">
+            <strong>Advice:</strong> Maintain current habits with balanced diet and exercise.<br>
+            <strong>Risk:</strong> Low risk — keep it up!
+          </p>
+        </div>
+        <div class="bmi-card cat-ow">
+          <div class="bmi-card-header">
+            <span class="bmi-card-cat">Overweight</span>
+            <span class="bmi-card-range">25.0 – 29.9</span>
+          </div>
+          <p class="bmi-card-detail">
+            <strong>Advice:</strong> Adopt a healthier diet and increase physical activity.<br>
+            <strong>Risk:</strong> Increased risk of heart disease and diabetes.
+          </p>
+        </div>
+        <div class="bmi-card cat-o1">
+          <div class="bmi-card-header">
+            <span class="bmi-card-cat">Obese Class I</span>
+            <span class="bmi-card-range">30.0 – 34.9</span>
+          </div>
+          <p class="bmi-card-detail">
+            <strong>Advice:</strong> Consult a healthcare provider for a weight management plan.<br>
+            <strong>Risk:</strong> High risk of cardiovascular issues and metabolic disorders.
+          </p>
+        </div>
+        <div class="bmi-card cat-o2">
+          <div class="bmi-card-header">
+            <span class="bmi-card-cat">Obese Class II</span>
+            <span class="bmi-card-range">35.0 – 39.9</span>
+          </div>
+          <p class="bmi-card-detail">
+            <strong>Advice:</strong> Seek medical guidance; consider structured weight loss programs.<br>
+            <strong>Risk:</strong> Very high risk of serious health complications.
+          </p>
+        </div>
+        <div class="bmi-card cat-o3">
+          <div class="bmi-card-header">
+            <span class="bmi-card-cat">Obese Class III</span>
+            <span class="bmi-card-range">≥ 40.0</span>
+          </div>
+          <p class="bmi-card-detail">
+            <strong>Advice:</strong> Immediate medical intervention recommended.<br>
+            <strong>Risk:</strong> Severe risk of life-threatening conditions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 11: UI FLOW
+       ============================================================ -->
+  <section class="slide" id="ui-flow">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">UI Flow</p>
+      <h2 class="slide-title fade-up stagger-1">Console Screens</h2>
+      <p class="slide-subtitle fade-up stagger-2">
+        The program repeats a simple global loop until the user picks Exit.
+      </p>
+
+      <div class="code-block mt-2 fade-up stagger-2" style="text-align:center;">
+        [Main menu] → user picks 1–7 → App runs feature → Press Enter → [Main menu]
+      </div>
+
+      <div class="two-col mt-3">
+        <div>
+          <div class="fade-up stagger-3">
+            <h3>Main Menu</h3>
+            <div class="terminal">
+              <div class="terminal-bar">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-title">BMI Calculator System</span>
+              </div>
+              <div class="terminal-body"><span class="t-header">============================================================
+                  BMI CALCULATOR SYSTEM
+============================================================</span>
+<span class="t-dim">Total Records: 0 / 500</span>
+
+<span class="t-bold">MENU OPTIONS:</span>
+<span class="t-accent">[1]</span> Quick BMI Calculation
+<span class="t-accent">[2]</span> Save BMI Record
+<span class="t-accent">[3]</span> View All Records
+<span class="t-accent">[4]</span> Search Record
+<span class="t-accent">[5]</span> Delete Record
+<span class="t-accent">[6]</span> Edit Record
+<span class="t-accent">[7]</span> Exit
+
+<span class="t-dim">Select an option (1-7): _</span></div>
+            </div>
+          </div>
+
+          <div class="mt-3 fade-up stagger-4">
+            <h3>Menu Routing</h3>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Choice</th><th>App Handler</th></tr></thead>
+                <tbody>
+                  <tr><td>[1]</td><td>quickCalculate()</td></tr>
+                  <tr><td>[2]</td><td>saveRecord()</td></tr>
+                  <tr><td>[3]</td><td>viewRecords()</td></tr>
+                  <tr><td>[4]</td><td>searchRecord()</td></tr>
+                  <tr><td>[5]</td><td>deleteRecord()</td></tr>
+                  <tr><td>[6]</td><td>editRecord()</td></tr>
+                  <tr><td>[7]</td><td>Exit → displayHeader("Goodbye!")</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="fade-up stagger-3">
+            <h3>Quick BMI Calculation</h3>
+            <div class="terminal">
+              <div class="terminal-bar">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-title">Quick BMI</span>
+              </div>
+              <div class="terminal-body"><span class="t-dim">Height unit:</span>
+<span class="t-accent">[1]</span> Centimeters
+<span class="t-accent">[2]</span> Feet
+<span class="t-dim">Enter unit option (1-2):</span> <span class="t-bold">1</span>
+<span class="t-dim">Enter height in cm (50-272):</span> <span class="t-bold">164</span>
+
+<span class="t-dim">Weight unit:</span>
+<span class="t-accent">[1]</span> Kilograms
+<span class="t-accent">[2]</span> Pounds
+<span class="t-dim">Enter unit option (1-2):</span> <span class="t-bold">1</span>
+<span class="t-dim">Enter weight in kg (2-500):</span> <span class="t-bold">54</span>
+
+<span class="t-header">============================================================
+                         BMI RESULT
+============================================================</span>
+  Name     : <span class="t-bold">Anonymous</span>
+  Gender   : <span class="t-dim">-</span>
+  Age      : <span class="t-dim">0</span>
+  Height   : <span class="t-bold">164.00 cm</span>
+  Weight   : <span class="t-bold">54.00 kg</span>
+<span class="t-dim">------------------------------------------------------------</span>
+  BMI      : <span class="t-accent">20.08</span>
+  Category : <span class="t-accent">Normal weight</span>
+  Advice   : Maintain current habits with balanced diet and exercise.
+  Risk     : Low risk - keep it up!</div>
+            </div>
+          </div>
+
+          <div class="mt-3 fade-up stagger-4">
+            <h3>Save BMI Record</h3>
+            <div class="terminal">
+              <div class="terminal-bar">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-title">Save Record</span>
+              </div>
+              <div class="terminal-body"><span class="t-dim">Enter name:</span> <span class="t-bold">mandy</span>
+<span class="t-dim">Select gender:</span>
+<span class="t-accent">[1]</span> Male  <span class="t-accent">[2]</span> Female  <span class="t-accent">[3]</span> Prefer not to say
+<span class="t-dim">Enter gender option (1-3):</span> <span class="t-bold">2</span>
+<span class="t-dim">Enter age (2-120):</span> <span class="t-bold">21</span>
+<span class="t-dim">Enter height in cm (50-272):</span> <span class="t-bold">156</span>
+<span class="t-dim">Enter weight in kg (2-500):</span> <span class="t-bold">53</span>
+
+<span class="t-header">============================================================
+                         BMI RESULT
+============================================================</span>
+  Name     : <span class="t-bold">mandy</span>
+  Gender   : <span class="t-bold">Female</span>
+  Age      : <span class="t-bold">21</span>
+  Height   : <span class="t-bold">156.00 cm</span>
+  Weight   : <span class="t-bold">53.00 kg</span>
+<span class="t-dim">------------------------------------------------------------</span>
+  BMI      : <span class="t-accent">21.78</span>
+  Category : <span class="t-accent">Normal weight</span>
+
+<span class="t-accent">Record saved successfully!</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 12: PROGRAM FLOW
+       ============================================================ -->
+  <section class="slide" id="program-flow">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">Program Flow</p>
+      <h2 class="slide-title fade-up stagger-1">Startup & Main Loop</h2>
+
+      <div class="two-col mt-3">
+        <div class="fade-up stagger-2">
+          <h3>Phase A — Construction (runs once)</h3>
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <span class="flow-step-num">1</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">main()</p>
+                <p class="flow-step-code">Program entry point</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">2</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">App("database") constructed</p>
+                <p class="flow-step-code">Creates controller with db folder path</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">3</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">FileManager constructor</p>
+                <p class="flow-step-code">read_from_file() → load User* into memory</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">4</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">init_database()</p>
+                <p class="flow-step-code">Create database/ + records.psv header if missing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-up stagger-3">
+          <h3>Phase B — Main Loop (repeats until Exit)</h3>
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <span class="flow-step-num">5</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">App::run()</p>
+                <p class="flow-step-code">Enters the infinite menu loop</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">5a</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">UI::displayMenu(record count)</p>
+                <p class="flow-step-code">Show main menu with record count</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">5b</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">UI::menuChoice()</p>
+                <p class="flow-step-code">getInput() validates user selection (1–7)</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">5c</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">App::handleMenuChoice()</p>
+                <p class="flow-step-code">Routes to feature method via switch</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">5d</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">UI::pauseScreen()</p>
+                <p class="flow-step-code">"Press Enter to continue..." (skipped on Exit)</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">6</span>
+              <div class="flow-step-content">
+                <p class="flow-step-title">Exit Selected</p>
+                <p class="flow-step-code">displayHeader("Goodbye!") → program ends</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3 fade-up stagger-4">
+        <h3>Entry Point Code</h3>
+        <div class="code-block">
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="type">App</span> app(<span class="str">"database"</span>);    <span class="cm">// Construction: FileManager loads PSV, init_database()</span>
+    app.<span class="fn">run</span>();               <span class="cm">// Main loop: menu → feature → pause → repeat</span>
+    <span class="kw">return</span> <span class="num">0</span>;               <span class="cm">// App destructor frees all unique_ptrs</span>
+}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 13: THANK YOU
+       ============================================================ -->
+  <section class="slide title-slide thankyou-slide" id="thankyou">
+    <div class="slide-inner">
+      <p class="slide-label fade-up">End of Presentation</p>
+      <h2 class="title-main fade-up stagger-1">Thank You!</h2>
+      <p class="title-desc fade-up stagger-2">
+        BMI Calculator System — Final Project for Computer Programming 2
+      </p>
+      <a href="https://github.com/bertwork/bmi-calculator" target="_blank" rel="noopener" class="repo-link fade-up stagger-3">
+        ⭐ View on GitHub
+      </a>
+      <div class="mt-4 fade-up stagger-4">
+        <p class="text-xs text-dim">Use ← → arrow keys or scroll to navigate slides</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keyboard Hint -->
+  <div class="keyboard-hint">
+    <span class="kbd">↑</span><span class="kbd">↓</span> Navigate slides
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
