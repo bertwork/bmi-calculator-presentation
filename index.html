@@ -434,26 +434,33 @@
           <div class="mt-3 fade-up stagger-3">
             <h3>BMIResult (struct)</h3>
             <div class="source-panel">
-              <div class="source-panel-header">
-                <span class="source-panel-icon">📄</span>
-                <span class="source-panel-filename">include/bmi_result.h</span>
-                <span class="source-panel-tag">Struct</span>
-              </div>
+            <div class="source-panel-header">
+              <span class="source-panel-icon">📄</span>
+              <span class="source-panel-filename">headers/bmi_service.h</span>
+              <span class="source-panel-tag">Struct</span>
+            </div>
               <div class="source-code">
-                <div class="line"><span class="line-num">1</span><span class="line-content"><span class="pp">#ifndef</span> BMI_RESULT_H</span></div>
-                <div class="line"><span class="line-num">2</span><span class="line-content"><span class="pp">#define</span> BMI_RESULT_H</span></div>
+                <div class="line"><span class="line-num">1</span><span class="line-content"><span class="pp">#pragma once</span></span></div>
+                <div class="line"><span class="line-num">2</span><span class="line-content"></span></div>
                 <div class="line"><span class="line-num">3</span><span class="line-content"><span class="pp">#include</span> <span class="str">&lt;string&gt;</span></span></div>
                 <div class="line"><span class="line-num">4</span><span class="line-content"></span></div>
-                <div class="line highlight"><span class="line-num">5</span><span class="line-content"><span class="kw">struct</span> <span class="type">BMIResult</span> {</span></div>
-                <div class="line highlight"><span class="line-num">6</span><span class="line-content">    <span class="type">std::string</span> category;</span></div>
-                <div class="line highlight"><span class="line-num">7</span><span class="line-content">    <span class="type">std::string</span> advice;</span></div>
-                <div class="line highlight"><span class="line-num">8</span><span class="line-content">    <span class="type">std::string</span> risk;</span></div>
-                <div class="line highlight"><span class="line-num">9</span><span class="line-content">};</span></div>
-                <div class="line"><span class="line-num">10</span><span class="line-content"></span></div>
-                <div class="line"><span class="line-num">11</span><span class="line-content"><span class="pp">#endif</span></span></div>
+                <div class="line"><span class="line-num">5</span><span class="line-content"><span class="cm">// BMIResult is a plain struct (all members public) used as a return type for classification.</span></span></div>
+                <div class="line highlight"><span class="line-num">6</span><span class="line-content"><span class="kw">struct</span> <span class="type">BMIResult</span> {</span></div>
+                <div class="line highlight"><span class="line-num">7</span><span class="line-content">    <span class="type">std::string</span> category;   <span class="cm">// WHO category (e.g., "Normal weight")</span></span></div>
+                <div class="line highlight"><span class="line-num">8</span><span class="line-content">    <span class="type">std::string</span> advice;     <span class="cm">// Lifestyle/health guidance</span></span></div>
+                <div class="line highlight"><span class="line-num">9</span><span class="line-content">    <span class="type">std::string</span> risk;       <span class="cm">// Associated health risks</span></span></div>
+                <div class="line highlight"><span class="line-num">10</span><span class="line-content">};</span></div>
+                <div class="line"><span class="line-num">11</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">12</span><span class="line-content"><span class="cm">// BMIService class provides static methods (declaration truncated for brevity)</span></span></div>
+                <div class="line"><span class="line-num">13</span><span class="line-content"><span class="kw">class</span> <span class="type">BMIService</span> {</span></div>
+                <div class="line"><span class="line-num">14</span><span class="line-content">    <span class="cm">// ... full implementation omitted ...</span></span></div>
+                <div class="line"><span class="line-num">15</span><span class="line-content">};</span></div>
               </div>
             </div>
-            <p class="text-sm text-dim mt-1">A lightweight container for three strings returned after BMI classification. No methods — only public fields. Uses <code class="text-mono text-accent">struct</code> (default public) instead of <code class="text-mono text-accent">class</code>.</p>
+            <p class="text-sm text-dim mt-1">
+              <code class="text-mono text-accent">BMIResult</code> is a lightweight <strong class="text-accent">struct</strong> (public by default) that holds three strings returned after BMI classification. 
+              It has no methods — only public data fields. The related <code class="text-mono text-accent">BMIService</code> class (not fully shown here) provides static methods that return this struct.
+            </p>
           </div>
 
           <div class="mt-3 fade-up stagger-4">
@@ -605,27 +612,35 @@
                 <span class="source-panel-tag">unique_ptr</span>
               </div>
               <div class="source-code">
-                <div class="line"><span class="line-num">1</span><span class="line-content"><span class="kw">bool</span> <span class="type">FileManager</span>::<span class="fn">create</span>(<span class="kw">const</span> <span class="type">User</span> <span class="op">&amp;</span>user) {</span></div>
-                <div class="line"><span class="line-num">2</span><span class="line-content">    <span class="kw">int</span> new_id <span class="op">=</span> <span class="fn">generate_id</span>();</span></div>
-                <div class="line"><span class="line-num">3</span><span class="line-content"></span></div>
-                <div class="line"><span class="line-num">4</span><span class="line-content">    <span class="cm">// Heap-allocate via make_unique — no raw new/delete</span></span></div>
-                <div class="line highlight"><span class="line-num">5</span><span class="line-content">    <span class="kw">auto</span> stored <span class="op">=</span> std::<span class="fn">make_unique</span><span class="op">&lt;</span><span class="type">User</span><span class="op">&gt;</span>(user);</span></div>
-                <div class="line highlight"><span class="line-num">6</span><span class="line-content">    stored<span class="op">-&gt;</span><span class="fn">set_id</span>(new_id);</span></div>
-                <div class="line"><span class="line-num">7</span><span class="line-content"></span></div>
-                <div class="line"><span class="line-num">8</span><span class="line-content">    <span class="cm">// Transfer ownership into the vector</span></span></div>
-                <div class="line highlight"><span class="line-num">9</span><span class="line-content">    records.<span class="fn">push_back</span>(std::<span class="fn">move</span>(stored));</span></div>
-                <div class="line"><span class="line-num">10</span><span class="line-content"></span></div>
-                <div class="line"><span class="line-num">11</span><span class="line-content">    <span class="fn">write_to_file</span>();  <span class="cm">// sync to disk</span></span></div>
-                <div class="line"><span class="line-num">12</span><span class="line-content">    <span class="fn">backup</span>();         <span class="cm">// create backup copy</span></span></div>
-                <div class="line"><span class="line-num">13</span><span class="line-content">    <span class="kw">return true</span>;</span></div>
-                <div class="line"><span class="line-num">14</span><span class="line-content">}</span></div>
+                <div class="line"><span class="line-num">1</span><span class="line-content"><span class="cm">// Creates a new record, assigns a unique ID, stores in vector, and persists to disk</span></span></div>
+                <div class="line"><span class="line-num">2</span><span class="line-content"><span class="kw">void</span> <span class="type">FileManager</span>::<span class="fn">create</span>(<span class="kw">const</span> <span class="type">User</span> <span class="op">&amp;</span>user) {</span></div>
+                <div class="line"><span class="line-num">3</span><span class="line-content">    <span class="cm">// Generate a new unique ID for this record</span></span></div>
+                <div class="line"><span class="line-num">4</span><span class="line-content">    <span class="kw">int</span> newId <span class="op">=</span> <span class="fn">get_next_id</span>();</span></div>
+                <div class="line"><span class="line-num">5</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">6</span><span class="line-content">    <span class="cm">// Heap‑allocate a copy of the user via unique_ptr (no raw new/delete)</span></span></div>
+                <div class="line highlight"><span class="line-num">7</span><span class="line-content">    <span class="kw">auto</span> stored <span class="op">=</span> std::<span class="fn">make_unique</span><span class="op">&lt;</span><span class="type">User</span><span class="op">&gt;</span>(user);</span></div>
+                <div class="line"><span class="line-num">8</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">9</span><span class="line-content">    <span class="cm">// Assign the new ID to the heap object</span></span></div>
+                <div class="line highlight"><span class="line-num">10</span><span class="line-content">    stored<span class="op">-&gt;</span><span class="fn">set_id</span>(newId);</span></div>
+                <div class="line"><span class="line-num">11</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">12</span><span class="line-content">    <span class="cm">// Transfer ownership of the unique_ptr into the records vector</span></span></div>
+                <div class="line highlight"><span class="line-num">13</span><span class="line-content">    records.<span class="fn">push_back</span>(std::<span class="fn">move</span>(stored));</span></div>
+                <div class="line"><span class="line-num">14</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">15</span><span class="line-content">    <span class="cm">// Persist the updated records vector to the PSV file</span></span></div>
+                <div class="line"><span class="line-num">16</span><span class="line-content">    <span class="fn">write_to_file</span>();</span></div>
+                <div class="line"><span class="line-num">17</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">18</span><span class="line-content">    <span class="cm">// Create a timestamped backup copy for safety</span></span></div>
+                <div class="line"><span class="line-num">19</span><span class="line-content">    <span class="fn">backup</span>();</span></div>
+                <div class="line"><span class="line-num">20</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">21</span><span class="line-content">    <span class="cm">// Inform the user that the record was saved successfully</span></span></div>
+                <div class="line"><span class="line-num">22</span><span class="line-content">    std::<span class="fn">cout</span> <span class="op">&lt;&lt;</span> <span class="str">GREEN</span> <span class="op">&lt;&lt;</span> <span class="str">"\nRecord saved! (ID: "</span> <span class="op">&lt;&lt;</span> newId <span class="op">&lt;&lt;</span> <span class="str">")\n"</span> <span class="op">&lt;&lt;</span> <span class="str">RESET</span>;</span></div>
+                <div class="line"><span class="line-num">23</span><span class="line-content">}</span></div>
               </div>
             </div>
             <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
               <strong class="text-accent">Key:</strong> <code class="text-mono">make_unique</code> allocates on the heap → <code class="text-mono">std::move</code> transfers ownership into the vector → <code class="text-mono">unique_ptr</code> auto-frees on destruction.
             </p>
           </div>
-        </div>
 
         <div class="fade-up stagger-4">
           <h3>Pointer Lifecycle of a Saved Record</h3>
@@ -672,6 +687,33 @@
                 <p class="flow-step-code">~FileManager → unique_ptrs free heap memory</p>
               </div>
             </div>
+          </div>
+                    <div class="mt-4 fade-up stagger-5">
+            <h3>Reading Records — Non‑owning Pointers</h3>
+            <div class="source-panel">
+              <div class="source-panel-header">
+                <span class="source-panel-icon">📄</span>
+                <span class="source-panel-filename">src/file_manager.cpp</span>
+                <span class="source-panel-tag">raw pointer access</span>
+              </div>
+              <div class="source-code">
+                <div class="line"><span class="line-num">1</span><span class="line-content"><span class="cm">// Returns a vector of non-owning raw pointers to the stored records.</span></span></div>
+                <div class="line"><span class="line-num">2</span><span class="line-content"><span class="kw">std::vector&lt;const User *&gt;</span> <span class="type">FileManager</span>::<span class="fn">read_all</span>() <span class="kw">const</span> {</span></div>
+                <div class="line"><span class="line-num">3</span><span class="line-content">    <span class="kw">std::vector&lt;const User *&gt;</span> ptrs;</span></div>
+                <div class="line"><span class="line-num">4</span><span class="line-content">    ptrs.<span class="fn">reserve</span>(records.<span class="fn">size</span>());</span></div>
+                <div class="line"><span class="line-num">5</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">6</span><span class="line-content">    <span class="cm">// Iterate over the unique_ptrs, but only give away raw pointers.</span></span></div>
+                <div class="line"><span class="line-num">7</span><span class="line-content">    <span class="kw">for</span> (<span class="kw">const auto</span> <span class="op">&amp;</span>u : records) {</span></div>
+                <div class="line highlight"><span class="line-num">8</span><span class="line-content">        ptrs.<span class="fn">push_back</span>(u.<span class="fn">get</span>());   <span class="cm">// get() returns the raw pointer (non-owning)</span></span></div>
+                <div class="line"><span class="line-num">9</span><span class="line-content">    }</span></div>
+                <div class="line"><span class="line-num">10</span><span class="line-content"></span></div>
+                <div class="line"><span class="line-num">11</span><span class="line-content">    <span class="kw">return</span> ptrs;</span></div>
+                <div class="line"><span class="line-num">12</span><span class="line-content">}</span></div>
+              </div>
+            </div>
+            <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
+              <strong class="text-accent">Note:</strong> <code class="text-mono">u.get()</code> gives a raw pointer without transferring ownership. The <code class="text-mono">unique_ptr</code> still owns and manages the heap memory. This pattern is safe because the caller does not delete the pointer.
+            </p>
           </div>
         </div>
       </div>
@@ -851,14 +893,148 @@
             <div class="line highlight"><span class="line-num">6</span><span class="line-content">    file <span class="op">&lt;&lt;</span> <span class="str">"id|name|gender|age|height|weight|bmi|category|advice|risk\n"</span>;</span></div>
             <div class="line"><span class="line-num">7</span><span class="line-content"></span></div>
             <div class="line"><span class="line-num">8</span><span class="line-content">    <span class="cm">// Write each record via User::to_psv()</span></span></div>
-            <div class="line highlight"><span class="line-num">9</span><span class="line-content">    <span class="kw">for</span> (<span class="kw">const auto</span> <span class="op">&amp;</span>u : records) {</span></div>
-            <div class="line highlight"><span class="line-num">10</span><span class="line-content">        file <span class="op">&lt;&lt;</span> u<span class="op">-&gt;</span><span class="fn">to_psv</span>() <span class="op">&lt;&lt;</span> <span class="str">"\n"</span>;</span></div>
+            <div class="line highlight"><span class="line-num">9</span><span class="line-content">    <span class="kw">for</span> (<span class="kw">const auto</span> <span class="op">&amp;</span>user : records) {</span></div>
+            <div class="line highlight"><span class="line-num">10</span><span class="line-content">        file <span class="op">&lt;&lt;</span> user<span class="op">-&gt;</span><span class="fn">to_psv</span>() <span class="op">&lt;&lt;</span> <span class="str">"\n"</span>;</span></div>
             <div class="line highlight"><span class="line-num">11</span><span class="line-content">    }</span></div>
             <div class="line"><span class="line-num">12</span><span class="line-content">}  <span class="cm">// ofstream destructor auto-closes and flushes</span></span></div>
           </div>
         </div>
         <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
           <strong class="text-accent">Pattern:</strong> Every create, update, or delete calls <code class="text-mono">write_to_file()</code> to rewrite the full file from the in-memory vector. The <code class="text-mono">User::to_psv()</code> method serializes each record to a pipe-separated line.
+        </p>
+      </div>
+
+      <div class="mt-3 fade-up stagger-8">
+        <h3>Source Code — PSV Serialization (User)</h3>
+        <div class="source-panel">
+          <div class="source-panel-header">
+            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-filename">src/user.cpp</span>
+            <span class="source-panel-tag">to_psv / from_psv</span>
+          </div>
+          <div class="source-code">
+            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="cm">// Serialize User object to pipe-separated string for file storage</span></span></div>
+            <div class="line"><span class="line-num">2</span><span class="line-content"><span class="type">std::string</span> <span class="type">User</span>::<span class="fn">to_psv</span>() <span class="kw">const</span> {</span></div>
+            <div class="line"><span class="line-num">3</span><span class="line-content">    <span class="type">std::ostringstream</span> oss;  <span class="cm">// Use string stream for efficient concatenation</span></span></div>
+            <div class="line"><span class="line-num">4</span><span class="line-content">    oss <span class="op">&lt;&lt;</span> id <span class="op">&lt;&lt;</span> <span class="str">"|"</span> <span class="op">&lt;&lt;</span> name <span class="op">&lt;&lt;</span> <span class="str">"|"</span> <span class="op">&lt;&lt;</span> gender <span class="op">&lt;&lt;</span> <span class="str">"|"</span> <span class="op">&lt;&lt;</span> age <span class="op">&lt;&lt;</span> <span class="str">"|"</span> <span class="op">&lt;&lt;</span> height</span></div>
+            <div class="line"><span class="line-num">5</span><span class="line-content">        <span class="op">&lt;&lt;</span> <span class="str">"|"</span> <span class="op">&lt;&lt;</span> weight <span class="op">&lt;&lt;</span> <span class="str">"|"</span> <span class="op">&lt;&lt;</span> bmi <span class="op">&lt;&lt;</span> <span class="str">"|"</span> <span class="op">&lt;&lt;</span> category <span class="op">&lt;&lt;</span> <span class="str">"|"</span> <span class="op">&lt;&lt;</span> advice <span class="op">&lt;&lt;</span> <span class="str">"|"</span></span></div>
+            <div class="line"><span class="line-num">6</span><span class="line-content">        <span class="op">&lt;&lt;</span> risk;  <span class="cm">// Pipe '|' separates each field</span></span></div>
+            <div class="line"><span class="line-num">7</span><span class="line-content">    <span class="kw">return</span> oss.<span class="fn">str</span>();</span></div>
+            <div class="line"><span class="line-num">8</span><span class="line-content">}</span></div>
+            <div class="line"><span class="line-num">9</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">10</span><span class="line-content"><span class="cm">// Parse a pipe-separated line back into a User object</span></span></div>
+            <div class="line"><span class="line-num">11</span><span class="line-content"><span class="type">User</span> <span class="type">User</span>::<span class="fn">from_psv</span>(<span class="kw">const</span> <span class="type">std::string</span> <span class="op">&amp;</span>psvLine) {</span></div>
+            <div class="line"><span class="line-num">12</span><span class="line-content">    <span class="type">std::istringstream</span> iss(psvLine);</span></div>
+            <div class="line"><span class="line-num">13</span><span class="line-content">    <span class="type">std::string</span> token;  <span class="cm">// Temporary storage for each field</span></span></div>
+            <div class="line"><span class="line-num">14</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">15</span><span class="line-content">    <span class="cm">// Default values in case parsing fails</span></span></div>
+            <div class="line"><span class="line-num">16</span><span class="line-content">    <span class="kw">int</span> id <span class="op">=</span> <span class="num">0</span>;</span></div>
+            <div class="line"><span class="line-num">17</span><span class="line-content">    <span class="type">std::string</span> name, gender, category, advice, risk;</span></div>
+            <div class="line"><span class="line-num">18</span><span class="line-content">    <span class="kw">int</span> age <span class="op">=</span> <span class="num">0</span>;</span></div>
+            <div class="line"><span class="line-num">19</span><span class="line-content">    <span class="kw">double</span> height <span class="op">=</span> <span class="num">0.0</span>, weight <span class="op">=</span> <span class="num">0.0</span>, bmi <span class="op">=</span> <span class="num">0.0</span>;</span></div>
+            <div class="line"><span class="line-num">20</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">21</span><span class="line-content">    <span class="kw">try</span> {</span></div>
+            <div class="line"><span class="line-num">22</span><span class="line-content">        <span class="cm">// Parse each field in order, converting types where needed</span></span></div>
+            <div class="line"><span class="line-num">23</span><span class="line-content">        <span class="kw">if</span> (std::<span class="fn">getline</span>(iss, token, <span class="str">'|'</span>)) {</span></div>
+            <div class="line"><span class="line-num">24</span><span class="line-content">            id <span class="op">=</span> std::<span class="fn">stoi</span>(token);  <span class="cm">// Convert string to int</span></span></div>
+            <div class="line"><span class="line-num">25</span><span class="line-content">        }</span></div>
+            <div class="line"><span class="line-num">26</span><span class="line-content">        std::<span class="fn">getline</span>(iss, name, <span class="str">'|'</span>);      <span class="cm">// Name stays as string</span></span></div>
+            <div class="line"><span class="line-num">27</span><span class="line-content">        std::<span class="fn">getline</span>(iss, gender, <span class="str">'|'</span>);    <span class="cm">// Gender stays as string</span></span></div>
+            <div class="line"><span class="line-num">28</span><span class="line-content">        <span class="kw">if</span> (std::<span class="fn">getline</span>(iss, token, <span class="str">'|'</span>)) {</span></div>
+            <div class="line"><span class="line-num">29</span><span class="line-content">            age <span class="op">=</span> std::<span class="fn">stoi</span>(token);</span></div>
+            <div class="line"><span class="line-num">30</span><span class="line-content">        }</span></div>
+            <div class="line"><span class="line-num">31</span><span class="line-content">        <span class="kw">if</span> (std::<span class="fn">getline</span>(iss, token, <span class="str">'|'</span>)) {</span></div>
+            <div class="line"><span class="line-num">32</span><span class="line-content">            height <span class="op">=</span> std::<span class="fn">stod</span>(token);  <span class="cm">// Convert string to double</span></span></div>
+            <div class="line"><span class="line-num">33</span><span class="line-content">        }</span></div>
+            <div class="line"><span class="line-num">34</span><span class="line-content">        <span class="kw">if</span> (std::<span class="fn">getline</span>(iss, token, <span class="str">'|'</span>)) {</span></div>
+            <div class="line"><span class="line-num">35</span><span class="line-content">            weight <span class="op">=</span> std::<span class="fn">stod</span>(token);</span></div>
+            <div class="line"><span class="line-num">36</span><span class="line-content">        }</span></div>
+            <div class="line"><span class="line-num">37</span><span class="line-content">        <span class="kw">if</span> (std::<span class="fn">getline</span>(iss, token, <span class="str">'|'</span>)) {</span></div>
+            <div class="line"><span class="line-num">38</span><span class="line-content">            bmi <span class="op">=</span> std::<span class="fn">stod</span>(token);</span></div>
+            <div class="line"><span class="line-num">39</span><span class="line-content">        }</span></div>
+            <div class="line"><span class="line-num">40</span><span class="line-content">        std::<span class="fn">getline</span>(iss, category, <span class="str">'|'</span>);  <span class="cm">// These remain strings</span></span></div>
+            <div class="line"><span class="line-num">41</span><span class="line-content">        std::<span class="fn">getline</span>(iss, advice, <span class="str">'|'</span>);</span></div>
+            <div class="line"><span class="line-num">42</span><span class="line-content">        std::<span class="fn">getline</span>(iss, risk);         <span class="cm">// Last field (no trailing delimiter)</span></span></div>
+            <div class="line"><span class="line-num">43</span><span class="line-content">    } <span class="kw">catch</span> (<span class="kw">const</span> std::<span class="type">exception</span> <span class="op">&amp;</span>e) {</span></div>
+            <div class="line"><span class="line-num">44</span><span class="line-content">        <span class="cm">// Log error but continue – skip malformed record instead of crashing</span></span></div>
+            <div class="line"><span class="line-num">45</span><span class="line-content">        std::<span class="fn">cerr</span> <span class="op">&lt;&lt;</span> <span class="str">"Warning: skipping malformed PSV record: "</span> <span class="op">&lt;&lt;</span> e.<span class="fn">what</span>() <span class="op">&lt;&lt;</span> <span class="str">"\n"</span>;</span></div>
+            <div class="line"><span class="line-num">46</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">47</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">48</span><span class="line-content">    <span class="cm">// Construct and return a new User object with parsed values</span></span></div>
+            <div class="line"><span class="line-num">49</span><span class="line-content">    <span class="kw">return</span> <span class="type">User</span>(id, name, gender, age, height, weight, bmi, category, advice, risk);</span></div>
+            <div class="line"><span class="line-num">50</span><span class="line-content">}</span></div>
+          </div>
+        </div>
+        <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
+          <strong class="text-accent">Pattern:</strong> <code class="text-mono">to_psv()</code> serializes a record into a pipe‑separated line using <code class="text-mono">std::ostringstream</code>; <code class="text-mono">from_psv()</code> parses it back with error handling. This keeps file I/O logic clean.
+        </p>
+      </div>
+      
+      <div class="mt-3 fade-up stagger-9">
+        <h3>Source Code — Automatic Backup System</h3>
+        <div class="source-panel">
+          <div class="source-panel-header">
+            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-filename">src/file_manager.cpp</span>
+            <span class="source-panel-tag">backup()</span>
+          </div>
+          <div class="source-code">
+            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="kw">void</span> <span class="type">FileManager</span>::<span class="fn">backup</span>() {</span></div>
+            <div class="line"><span class="line-num">2</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(db_file_path)) {</span></div>
+            <div class="line"><span class="line-num">3</span><span class="line-content">        <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">4</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">5</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">6</span><span class="line-content">    <span class="kw">const</span> <span class="type">std::string</span> backup_folder <span class="op">=</span> db_folder <span class="op">+</span> <span class="str">"/backup"</span>;</span></div>
+            <div class="line"><span class="line-num">7</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(backup_folder)) {</span></div>
+            <div class="line"><span class="line-num">8</span><span class="line-content">        fs::<span class="fn">create_directories</span>(backup_folder);</span></div>
+            <div class="line"><span class="line-num">9</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">10</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">11</span><span class="line-content">    <span class="kw">const</span> <span class="kw">auto</span> now <span class="op">=</span> std::<span class="fn">chrono::system_clock::now</span>();</span></div>
+            <div class="line"><span class="line-num">12</span><span class="line-content">    <span class="kw">const</span> std::time_t time <span class="op">=</span> std::<span class="fn">chrono::system_clock::to_time_t</span>(now);</span></div>
+            <div class="line"><span class="line-num">13</span><span class="line-content">    <span class="type">std::tm</span> localTime{};</span></div>
+            <div class="line"><span class="line-num">14</span><span class="line-content"><span class="pp">#ifdef _WIN32</span></span></div>
+            <div class="line"><span class="line-num">15</span><span class="line-content">    <span class="fn">localtime_s</span>(<span class="op">&amp;</span>localTime, <span class="op">&amp;</span>time);</span></div>
+            <div class="line"><span class="line-num">16</span><span class="line-content"><span class="pp">#else</span></span></div>
+            <div class="line"><span class="line-num">17</span><span class="line-content">    <span class="fn">localtime_r</span>(<span class="op">&amp;</span>time, <span class="op">&amp;</span>localTime);</span></div>
+            <div class="line"><span class="line-num">18</span><span class="line-content"><span class="pp">#endif</span></span></div>
+            <div class="line"><span class="line-num">19</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">20</span><span class="line-content">    <span class="type">std::ostringstream</span> timestamp;</span></div>
+            <div class="line"><span class="line-num">21</span><span class="line-content">    timestamp <span class="op">&lt;&lt;</span> std::<span class="fn">put_time</span>(<span class="op">&amp;</span>localTime, <span class="str">"%Y-%m-%d_%H-%M-%S"</span>);</span></div>
+            <div class="line"><span class="line-num">22</span><span class="line-content">    <span class="kw">const</span> <span class="type">std::string</span> backup_path <span class="op">=</span></span></div>
+            <div class="line"><span class="line-num">23</span><span class="line-content">        backup_folder <span class="op">+</span> <span class="str">"/records_"</span> <span class="op">+</span> timestamp.<span class="fn">str</span>() <span class="op">+</span> <span class="str">".psv"</span>;</span></div>
+            <div class="line"><span class="line-num">24</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">25</span><span class="line-content">    <span class="kw">try</span> {</span></div>
+            <div class="line"><span class="line-num">26</span><span class="line-content">        fs::<span class="fn">copy_file</span>(db_file_path, backup_path,</span></div>
+            <div class="line"><span class="line-num">27</span><span class="line-content">                      fs::<span class="fn">copy_options::overwrite_existing</span>);</span></div>
+            <div class="line"><span class="line-num">28</span><span class="line-content">    } <span class="kw">catch</span> (<span class="kw">const</span> fs::<span class="type">filesystem_error</span> <span class="op">&amp;</span>) {</span></div>
+            <div class="line"><span class="line-num">29</span><span class="line-content">        <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">30</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">31</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">32</span><span class="line-content">    <span class="type">std::vector</span><span class="op">&lt;</span>fs::<span class="type">directory_entry</span><span class="op">&gt;</span> backupFiles;</span></div>
+            <div class="line"><span class="line-num">33</span><span class="line-content">    <span class="kw">for</span> (<span class="kw">const auto</span> <span class="op">&amp;</span>entry : fs::<span class="fn">directory_iterator</span>(backup_folder)) {</span></div>
+            <div class="line"><span class="line-num">34</span><span class="line-content">        <span class="kw">if</span> (entry.<span class="fn">is_regular_file</span>() <span class="op">&amp;&amp;</span> entry.<span class="fn">path</span>().<span class="fn">extension</span>() <span class="op">==</span> <span class="str">".psv"</span>) {</span></div>
+            <div class="line"><span class="line-num">35</span><span class="line-content">            backupFiles.<span class="fn">push_back</span>(entry);</span></div>
+            <div class="line"><span class="line-num">36</span><span class="line-content">        }</span></div>
+            <div class="line"><span class="line-num">37</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">38</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">39</span><span class="line-content">    <span class="kw">if</span> (backupFiles.<span class="fn">size</span>() <span class="op">&lt;=</span> <span class="num">3</span>) {</span></div>
+            <div class="line"><span class="line-num">40</span><span class="line-content">        <span class="kw">return</span>;</span></div>
+            <div class="line"><span class="line-num">41</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">42</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">43</span><span class="line-content">    std::<span class="fn">sort</span>(backupFiles.<span class="fn">begin</span>(), backupFiles.<span class="fn">end</span>(),</span></div>
+            <div class="line"><span class="line-num">44</span><span class="line-content">              [](<span class="kw">const</span> fs::<span class="type">directory_entry</span> <span class="op">&amp;</span>a, <span class="kw">const</span> fs::<span class="type">directory_entry</span> <span class="op">&amp;</span>b) {</span></div>
+            <div class="line"><span class="line-num">45</span><span class="line-content">                  <span class="kw">return</span> fs::<span class="fn">last_write_time</span>(a) <span class="op">&lt;</span> fs::<span class="fn">last_write_time</span>(b);</span></div>
+            <div class="line"><span class="line-num">46</span><span class="line-content">              });</span></div>
+            <div class="line"><span class="line-num">47</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">48</span><span class="line-content">    <span class="kw">while</span> (backupFiles.<span class="fn">size</span>() <span class="op">&gt;</span> <span class="num">3</span>) {</span></div>
+            <div class="line"><span class="line-num">49</span><span class="line-content">        fs::<span class="fn">remove</span>(backupFiles.<span class="fn">front</span>().<span class="fn">path</span>());</span></div>
+            <div class="line"><span class="line-num">50</span><span class="line-content">        backupFiles.<span class="fn">erase</span>(backupFiles.<span class="fn">begin</span>());</span></div>
+            <div class="line"><span class="line-num">51</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">52</span><span class="line-content">}</span></div>
+          </div>
+        </div>
+        <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
+          <strong class="text-accent">Note:</strong> <code class="text-mono">backup()</code> creates a timestamped copy after every create/update, and automatically deletes old backups (keeps only the 3 newest). This prevents data loss.
         </p>
       </div>
     </div>
@@ -899,8 +1075,8 @@
             <span class="bmi-card-range">&lt; 18.5</span>
           </div>
           <p class="bmi-card-detail">
-            <strong>Advice:</strong> Increase caloric intake with nutritious foods.<br>
-            <strong>Risk:</strong> Malnutrition, osteoporosis, weakened immunity.
+            <strong>Advice:</strong> Increase caloric intake with nutrient-dense foods.<br>
+            <strong>Risk:</strong> Malnutrition, osteoporosis, weakened immune system.
           </p>
         </div>
         <div class="bmi-card cat-nw">
@@ -909,8 +1085,8 @@
             <span class="bmi-card-range">18.5 – 24.9</span>
           </div>
           <p class="bmi-card-detail">
-            <strong>Advice:</strong> Maintain current habits with balanced diet and exercise.<br>
-            <strong>Risk:</strong> Low risk — keep it up!
+            <strong>Advice:</strong> Maintain current habits with a balanced diet and regular exercise.<br>
+            <strong>Risk:</strong> Low risk for weight‑related issues.
           </p>
         </div>
         <div class="bmi-card cat-ow">
@@ -920,7 +1096,7 @@
           </div>
           <p class="bmi-card-detail">
             <strong>Advice:</strong> Adopt a healthier diet and increase physical activity.<br>
-            <strong>Risk:</strong> Increased risk of heart disease and diabetes.
+            <strong>Risk:</strong> Increased risk of heart disease, diabetes, joint problems.
           </p>
         </div>
         <div class="bmi-card cat-o1">
@@ -930,7 +1106,7 @@
           </div>
           <p class="bmi-card-detail">
             <strong>Advice:</strong> Consult a healthcare provider for a weight management plan.<br>
-            <strong>Risk:</strong> High risk of cardiovascular issues and metabolic disorders.
+            <strong>Risk:</strong> High risk of cardiovascular disease, metabolic syndrome.
           </p>
         </div>
         <div class="bmi-card cat-o2">
@@ -949,8 +1125,8 @@
             <span class="bmi-card-range">≥ 40.0</span>
           </div>
           <p class="bmi-card-detail">
-            <strong>Advice:</strong> Immediate medical intervention recommended.<br>
-            <strong>Risk:</strong> Severe risk of life-threatening conditions.
+            <strong>Advice:</strong> Immediate medical intervention strongly recommended.<br>
+            <strong>Risk:</strong> Severe risk of life‑threatening conditions.
           </p>
         </div>
       </div>
@@ -1030,7 +1206,7 @@
                 <span class="terminal-dot"></span>
                 <span class="terminal-title">Quick BMI</span>
               </div>
-              <div class="terminal-body"><span class="t-dim">Height unit:</span>
+<div class="terminal-body"><span class="t-dim">Height unit:</span>
 <span class="t-accent">[1]</span> Centimeters
 <span class="t-accent">[2]</span> Feet
 <span class="t-dim">Enter unit option (1-2):</span> <span class="t-bold">1</span>
@@ -1053,9 +1229,9 @@
 <span class="t-dim">------------------------------------------------------------</span>
   BMI      : <span class="t-accent">20.08</span>
   Category : <span class="t-accent">Normal weight</span>
-  Advice   : Maintain current habits with balanced diet and exercise.
-  Risk     : Low risk - keep it up!</div>
-            </div>
+  Advice   : Maintain current habits with a balanced diet and regular exercise.
+  Risk     : Low risk for weight‑related issues.
+</div>
           </div>
 
           <div class="mt-3 fade-up stagger-4">
@@ -1067,7 +1243,7 @@
                 <span class="terminal-dot"></span>
                 <span class="terminal-title">Save Record</span>
               </div>
-              <div class="terminal-body"><span class="t-dim">Enter name:</span> <span class="t-bold">mandy</span>
+<div class="terminal-body"><span class="t-dim">Enter name:</span> <span class="t-bold">mandy</span>
 <span class="t-dim">Select gender:</span>
 <span class="t-accent">[1]</span> Male  <span class="t-accent">[2]</span> Female  <span class="t-accent">[3]</span> Prefer not to say
 <span class="t-dim">Enter gender option (1-3):</span> <span class="t-bold">2</span>
@@ -1086,6 +1262,8 @@
 <span class="t-dim">------------------------------------------------------------</span>
   BMI      : <span class="t-accent">21.78</span>
   Category : <span class="t-accent">Normal weight</span>
+  Advice   : Maintain current habits with a balanced diet and regular exercise.
+  Risk     : Low risk for weight‑related issues.
 
 <span class="t-accent">Record saved successfully!</span></div>
             </div>
@@ -1185,6 +1363,74 @@
             </div>
           </div>
         </div>
+      </div>
+            <!-- New source code panels for Program Flow -->
+      <div class="mt-4 fade-up stagger-4">
+        <h3>Source Code — Construction Phase</h3>
+        <div class="source-panel">
+          <div class="source-panel-header">
+            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-filename">app.cpp</span>
+            <span class="source-panel-tag">constructor</span>
+          </div>
+          <div class="source-code">
+            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="type">App</span>::<span class="fn">App</span>(<span class="kw">const</span> <span class="type">std::string</span> <span class="op">&amp;</span>db_folder)</span></div>
+            <div class="line"><span class="line-num">2</span><span class="line-content">    : <span class="fn">file_manager</span>(db_folder), <span class="fn">ui</span>() {</span></div>
+            <div class="line highlight"><span class="line-num">3</span><span class="line-content">    file_manager.<span class="fn">init_database</span>();</span></div>
+            <div class="line"><span class="line-num">4</span><span class="line-content">}</span></div>
+          </div>
+        </div>
+
+        <div class="source-panel mt-3">
+          <div class="source-panel-header">
+            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-filename">file_manager.cpp</span>
+            <span class="source-panel-tag">constructor + init</span>
+          </div>
+          <div class="source-code">
+            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="type">FileManager</span>::<span class="fn">FileManager</span>(<span class="kw">const</span> <span class="type">std::string</span> <span class="op">&amp;</span>folder)</span></div>
+            <div class="line"><span class="line-num">2</span><span class="line-content">    : <span class="fn">db_folder</span>(folder), <span class="fn">db_file_path</span>(folder <span class="op">+</span> <span class="str">"/records.psv"</span>) {</span></div>
+            <div class="line highlight"><span class="line-num">3</span><span class="line-content">    <span class="fn">read_from_file</span>();</span></div>
+            <div class="line"><span class="line-num">4</span><span class="line-content">}</span></div>
+            <div class="line"><span class="line-num">5</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">6</span><span class="line-content"><span class="kw">void</span> <span class="type">FileManager</span>::<span class="fn">init_database</span>() {</span></div>
+            <div class="line"><span class="line-num">7</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(db_folder))</span></div>
+            <div class="line"><span class="line-num">8</span><span class="line-content">        fs::<span class="fn">create_directories</span>(db_folder);</span></div>
+            <div class="line"><span class="line-num">9</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">10</span><span class="line-content">    <span class="kw">if</span> (<span class="op">!</span>fs::<span class="fn">exists</span>(db_file_path)) {</span></div>
+            <div class="line"><span class="line-num">11</span><span class="line-content">        <span class="type">std::ofstream</span> file(db_file_path);</span></div>
+            <div class="line"><span class="line-num">12</span><span class="line-content">        file <span class="op">&lt;&lt;</span> <span class="str">"id|name|gender|age|height|weight|bmi|category|advice|risk\n"</span>;</span></div>
+            <div class="line"><span class="line-num">13</span><span class="line-content">        <span class="fn">std::cout</span> <span class="op">&lt;&lt;</span> <span class="str">GREEN</span> <span class="op">&lt;&lt;</span> <span class="str">"Database initialized at "</span> <span class="op">&lt;&lt;</span> db_file_path <span class="op">&lt;&lt;</span> <span class="str">RESET</span>;</span></div>
+            <div class="line"><span class="line-num">14</span><span class="line-content">    }</span></div>
+            <div class="line"><span class="line-num">15</span><span class="line-content">}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 fade-up stagger-5">
+        <h3>Source Code — Main Loop</h3>
+        <div class="source-panel">
+          <div class="source-panel-header">
+            <span class="source-panel-icon">📄</span>
+            <span class="source-panel-filename">app.cpp</span>
+            <span class="source-panel-tag">run()</span>
+          </div>
+          <div class="source-code">
+            <div class="line"><span class="line-num">1</span><span class="line-content"><span class="kw">void</span> <span class="type">App</span>::<span class="fn">run</span>() {</span></div>
+            <div class="line"><span class="line-num">2</span><span class="line-content">    <span class="kw">int</span> menu_choice <span class="op">=</span> <span class="num">0</span>;</span></div>
+            <div class="line"><span class="line-num">3</span><span class="line-content">    <span class="kw">const</span> <span class="kw">int</span> exitChoice <span class="op">=</span> <span class="kw">static_cast&lt;int&gt;</span>(<span class="type">UI::MenuOption</span>::<span class="type">EXIT</span>);</span></div>
+            <div class="line"><span class="line-num">4</span><span class="line-content"></span></div>
+            <div class="line"><span class="line-num">5</span><span class="line-content">    <span class="kw">do</span> {</span></div>
+            <div class="line highlight"><span class="line-num">6</span><span class="line-content">        ui.<span class="fn">displayMenu</span>(file_manager.<span class="fn">getRecordCount</span>());</span></div>
+            <div class="line highlight"><span class="line-num">7</span><span class="line-content">        ui.<span class="fn">menuChoice</span>(menu_choice);</span></div>
+            <div class="line highlight"><span class="line-num">8</span><span class="line-content">        <span class="fn">handleMenuChoice</span>(<span class="kw">static_cast&lt;</span><span class="type">UI::MenuOption</span><span class="kw">&gt;</span>(menu_choice));</span></div>
+            <div class="line"><span class="line-num">9</span><span class="line-content">    } <span class="kw">while</span> (menu_choice <span class="op">!=</span> exitChoice);</span></div>
+            <div class="line"><span class="line-num">10</span><span class="line-content">}</span></div>
+          </div>
+        </div>
+        <p class="text-sm text-dim mt-1" style="border-left:2px solid var(--accent-dim); padding-left:1rem;">
+          <strong class="text-accent">Key:</strong> The <code class="text-mono">App</code> owns the <code class="text-mono">FileManager</code> and <code class="text-mono">UI</code>. The constructor triggers database initialization, while <code class="text-mono">run()</code> repeatedly displays the menu, gets user input, and routes to the appropriate handler until Exit is chosen.
+        </p>
       </div>
 
       <div class="mt-3 fade-up stagger-4">
