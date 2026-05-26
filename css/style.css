@@ -62,6 +62,7 @@ html {
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-dim) transparent;
+  border-top: 3px solid var(--accent-dim);
 }
 
 body {
@@ -92,12 +93,12 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  height: 2px;
+  height: 3px;
   width: 0%;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--accent-dim));
   z-index: 1000;
-  transition: width 100ms linear;
-  box-shadow: 0 0 10px var(--accent);
+  transition: width 150ms linear;
+  box-shadow: 0 0 12px var(--accent);
 }
 
 /* ── Top Navbar ── */
@@ -161,6 +162,22 @@ body {
   background: var(--accent-dim);
   border: 1px solid var(--border-accent);
   box-shadow: 0 0 8px rgba(94, 234, 212, 0.2);
+}
+
+/* ── Mobile Location Indicator ── */
+.mobile-location {
+  display: none;
+  color: var(--text-tertiary);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mobile-location #current-section {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* ── Side Dot Navigation ── */
@@ -1406,6 +1423,10 @@ table.matrix td.check {
 
   .dot-nav {
     display: none;
+  }
+
+  .mobile-location {
+    display: block;
   }
 }
 

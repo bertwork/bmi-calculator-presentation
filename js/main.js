@@ -7,26 +7,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const slides = document.querySelectorAll(".slide");
   const dotLinks = document.querySelectorAll(".dot-nav a");
   const navLinks = document.querySelectorAll(".nav-links a");
+  const currentSectionSpan = document.getElementById("current-section");
   const progressBar = document.getElementById("progress-bar");
   const navbar = document.querySelector(".navbar");
   const keyboardHint = document.querySelector(".keyboard-hint");
 
   // ── Intersection Observer — highlight active slide ──
-  const observerOptions = {
-    root: null,
-    threshold: 0.1,
-  };
+  // Improved detection: find the slide with the most visible area
+  function updateActiveSlidenow() {
+    let maxVisibility = 0;
+    let activeSlideId = null;
 
-  const slideObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        setActiveSlide(id);
+    slides.forEach((slide) => {
+      const rect = slide.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate visible height of the slide
+      const visibleTop = Math.max(0, rect.top);
+      const visibleBottom = Math.min(windowHeight, rect.bottom);
+      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+      // Calculate visibility as a percentage
+      const visibility = visibleHeight / windowHeight;
+
+      // Update if this slide is more visible than the previous max
+      if (visibility > maxVisibility) {
+        maxVisibility = visibility;
+        activeSlideId = slide.id;
       }
     });
-  }, observerOptions);
 
-  slides.forEach((slide) => slideObserver.observe(slide));
+    // Only update if we found a significantly visible slide (> 5%)
+    if (activeSlideId && maxVisibility > 0.05) {
+      setActiveSlide(activeSlideId);
+    }
+  }
+
+  // Initial check
+  updateActiveSlidenow();
 
   function setActiveSlide(id) {
     // Update dot nav
@@ -37,6 +55,25 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks.forEach((link) => {
       link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
     });
+    // Update mobile location indicator
+    const sectionMap = {
+      title: "Home",
+      about: "About",
+      features: "Features",
+      tech: "Tech Stack",
+      architecture: "Architecture",
+      dependencies: "Modules",
+      classes: "Classes",
+      pointers: "Pointers",
+      fileio: "File I/O",
+      "bmi-classification": "BMI Scale",
+      "ui-flow": "UI Flow",
+      "program-flow": "Program Flow",
+      thankyou: "Thank You",
+    };
+    if (currentSectionSpan) {
+      currentSectionSpan.textContent = sectionMap[id] || id;
+    }
   }
 
   // ── Entrance Animations (fade-up / fade-in) ──
@@ -47,6 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
+        } else {
+          entry.target.classList.remove("visible");
         }
       });
     },
@@ -65,6 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Navbar style on scroll
     navbar.classList.toggle("scrolled", scrollTop > 50);
+
+    // Update active slide based on viewport visibility
+    updateActiveSlidenow();
 
     // Hide keyboard hint after first scroll
     if (scrollTop > 100 && keyboardHint) {
