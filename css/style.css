@@ -2,7 +2,7 @@
    BMI Calculator Presentation — Style System (Mobile Optimized)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap");
 
 /* ── Design Tokens ── */
 :root {
@@ -31,8 +31,8 @@
   --bmi-obese2: #fca5a5;
   --bmi-obese3: #f87171;
 
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Fira Code", "Cascadia Code", monospace;
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -47,7 +47,9 @@
 }
 
 /* ── Reset & Base ── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -74,9 +76,16 @@ body {
   max-width: 100%;
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 3px; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-dim);
+  border-radius: 3px;
+}
 
 /* ── Progress Bar ── */
 #progress-bar {
@@ -142,14 +151,16 @@ body {
   white-space: nowrap;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.nav-links a:hover {
   color: var(--text-primary);
   background: var(--bg-card-hover);
 }
 
 .nav-links a.active {
   color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-accent);
+  box-shadow: 0 0 8px rgba(94, 234, 212, 0.2);
 }
 
 /* ── Side Dot Navigation ── */
@@ -171,7 +182,7 @@ body {
   height: 8px;
   border-radius: 50%;
   background: var(--border-subtle);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: var(--transition-base);
   position: relative;
 }
@@ -233,7 +244,9 @@ body {
 .fade-up {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  transition:
+    opacity var(--transition-slow),
+    transform var(--transition-slow);
 }
 
 .fade-up.visible {
@@ -250,13 +263,27 @@ body {
   opacity: 1;
 }
 
-.stagger-1 { transition-delay: 100ms; }
-.stagger-2 { transition-delay: 200ms; }
-.stagger-3 { transition-delay: 300ms; }
-.stagger-4 { transition-delay: 400ms; }
-.stagger-5 { transition-delay: 500ms; }
-.stagger-6 { transition-delay: 600ms; }
-.stagger-7 { transition-delay: 700ms; }
+.stagger-1 {
+  transition-delay: 100ms;
+}
+.stagger-2 {
+  transition-delay: 200ms;
+}
+.stagger-3 {
+  transition-delay: 300ms;
+}
+.stagger-4 {
+  transition-delay: 400ms;
+}
+.stagger-5 {
+  transition-delay: 500ms;
+}
+.stagger-6 {
+  transition-delay: 600ms;
+}
+.stagger-7 {
+  transition-delay: 700ms;
+}
 
 /* ── Typography ── */
 .slide-label {
@@ -369,7 +396,7 @@ h3 {
 }
 
 .gauge-ring::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -3px;
   border-radius: 50%;
@@ -396,9 +423,15 @@ h3 {
 }
 
 @keyframes gauge-spin {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(270deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ── Cards ── */
@@ -413,7 +446,7 @@ h3 {
 
 .card:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 
@@ -422,9 +455,15 @@ h3 {
   gap: 1rem;
 }
 
-.card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.card-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.card-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.card-grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
 
 .card-icon {
   font-size: 1.5rem;
@@ -562,7 +601,7 @@ td:first-child {
   align-items: center;
   gap: 6px;
   padding: 8px 12px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   border-bottom: 1px solid var(--border-subtle);
   min-width: max-content;
 }
@@ -571,12 +610,18 @@ td:first-child {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.terminal-dot:nth-child(1) { background: rgba(255, 95, 87, 0.7); }
-.terminal-dot:nth-child(2) { background: rgba(255, 189, 46, 0.7); }
-.terminal-dot:nth-child(3) { background: rgba(39, 201, 63, 0.7); }
+.terminal-dot:nth-child(1) {
+  background: rgba(255, 95, 87, 0.7);
+}
+.terminal-dot:nth-child(2) {
+  background: rgba(255, 189, 46, 0.7);
+}
+.terminal-dot:nth-child(3) {
+  background: rgba(39, 201, 63, 0.7);
+}
 
 .terminal-title {
   margin-left: 8px;
@@ -594,9 +639,16 @@ td:first-child {
   -webkit-overflow-scrolling: touch;
 }
 
-.terminal-body .t-accent { color: var(--accent); }
-.terminal-body .t-dim { color: var(--text-tertiary); }
-.terminal-body .t-bold { color: var(--text-primary); font-weight: 600; }
+.terminal-body .t-accent {
+  color: var(--accent);
+}
+.terminal-body .t-dim {
+  color: var(--text-tertiary);
+}
+.terminal-body .t-bold {
+  color: var(--text-primary);
+  font-weight: 600;
+}
 .terminal-body .t-header {
   color: var(--text-primary);
   font-weight: 600;
@@ -621,12 +673,25 @@ td:first-child {
   height: 4px;
 }
 
-.code-block .kw { color: #c792ea; }
-.code-block .fn { color: #82aaff; }
-.code-block .str { color: #c3e88d; }
-.code-block .cm { color: var(--text-tertiary); font-style: italic; }
-.code-block .type { color: #ffcb6b; }
-.code-block .num { color: #f78c6c; }
+.code-block .kw {
+  color: #c792ea;
+}
+.code-block .fn {
+  color: #82aaff;
+}
+.code-block .str {
+  color: #c3e88d;
+}
+.code-block .cm {
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+.code-block .type {
+  color: #ffcb6b;
+}
+.code-block .num {
+  color: #f78c6c;
+}
 
 /* ── Architecture Diagram ── */
 .arch-diagram {
@@ -648,8 +713,12 @@ td:first-child {
   flex-wrap: wrap;
 }
 
-.arch-layer:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
-.arch-layer:last-child { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+.arch-layer:first-child {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.arch-layer:last-child {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
 
 .arch-layer:hover {
   background: var(--bg-card-hover);
@@ -757,7 +826,7 @@ td:first-child {
 }
 
 .component-card:hover {
-  border-color: rgba(255,255,255,0.12);
+  border-color: rgba(255, 255, 255, 0.12);
   transform: translateY(-2px);
 }
 
@@ -808,7 +877,7 @@ td:first-child {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   padding: 0.2rem 0.6rem;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
   border-radius: 4px;
   color: var(--text-tertiary);
@@ -848,7 +917,7 @@ td:first-child {
 }
 
 .flow-step:not(:last-child) .flow-step-num::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 100%;
   left: 50%;
@@ -893,7 +962,7 @@ td:first-child {
   justify-content: center;
   font-size: clamp(0.5rem, 1.5vw, 0.6rem);
   font-weight: 600;
-  color: rgba(0,0,0,0.7);
+  color: rgba(0, 0, 0, 0.7);
   transition: var(--transition-base);
   cursor: default;
   white-space: nowrap;
@@ -905,12 +974,24 @@ td:first-child {
   flex: 1.5;
 }
 
-.bmi-scale-segment.seg-uw { background: var(--bmi-underweight); }
-.bmi-scale-segment.seg-nw { background: var(--bmi-normal); }
-.bmi-scale-segment.seg-ow { background: var(--bmi-overweight); }
-.bmi-scale-segment.seg-o1 { background: var(--bmi-obese1); }
-.bmi-scale-segment.seg-o2 { background: var(--bmi-obese2); }
-.bmi-scale-segment.seg-o3 { background: var(--bmi-obese3); }
+.bmi-scale-segment.seg-uw {
+  background: var(--bmi-underweight);
+}
+.bmi-scale-segment.seg-nw {
+  background: var(--bmi-normal);
+}
+.bmi-scale-segment.seg-ow {
+  background: var(--bmi-overweight);
+}
+.bmi-scale-segment.seg-o1 {
+  background: var(--bmi-obese1);
+}
+.bmi-scale-segment.seg-o2 {
+  background: var(--bmi-obese2);
+}
+.bmi-scale-segment.seg-o3 {
+  background: var(--bmi-obese3);
+}
 
 .bmi-labels {
   display: flex;
@@ -942,12 +1023,24 @@ td:first-child {
   background: var(--bg-card-hover);
 }
 
-.bmi-card.cat-uw { border-left-color: var(--bmi-underweight); }
-.bmi-card.cat-nw { border-left-color: var(--bmi-normal); }
-.bmi-card.cat-ow { border-left-color: var(--bmi-overweight); }
-.bmi-card.cat-o1 { border-left-color: var(--bmi-obese1); }
-.bmi-card.cat-o2 { border-left-color: var(--bmi-obese2); }
-.bmi-card.cat-o3 { border-left-color: var(--bmi-obese3); }
+.bmi-card.cat-uw {
+  border-left-color: var(--bmi-underweight);
+}
+.bmi-card.cat-nw {
+  border-left-color: var(--bmi-normal);
+}
+.bmi-card.cat-ow {
+  border-left-color: var(--bmi-overweight);
+}
+.bmi-card.cat-o1 {
+  border-left-color: var(--bmi-obese1);
+}
+.bmi-card.cat-o2 {
+  border-left-color: var(--bmi-obese2);
+}
+.bmi-card.cat-o3 {
+  border-left-color: var(--bmi-obese3);
+}
 
 .bmi-card-header {
   display: flex;
@@ -1031,18 +1124,42 @@ table.matrix td.check {
 }
 
 /* ── Utility ── */
-.mt-1 { margin-top: 0.5rem; }
-.mt-2 { margin-top: 1rem; }
-.mt-3 { margin-top: 1.5rem; }
-.mt-4 { margin-top: 2rem; }
-.mb-2 { margin-bottom: 1rem; }
-.mb-3 { margin-bottom: 1.5rem; }
-.text-accent { color: var(--accent); }
-.text-dim { color: var(--text-secondary); }
-.text-mono { font-family: var(--font-mono); }
-.text-sm { font-size: clamp(0.75rem, 2vw, 0.82rem); }
-.text-xs { font-size: clamp(0.65rem, 2vw, 0.72rem); }
-.fw-600 { font-weight: 600; }
+.mt-1 {
+  margin-top: 0.5rem;
+}
+.mt-2 {
+  margin-top: 1rem;
+}
+.mt-3 {
+  margin-top: 1.5rem;
+}
+.mt-4 {
+  margin-top: 2rem;
+}
+.mb-2 {
+  margin-bottom: 1rem;
+}
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+.text-accent {
+  color: var(--accent);
+}
+.text-dim {
+  color: var(--text-secondary);
+}
+.text-mono {
+  font-family: var(--font-mono);
+}
+.text-sm {
+  font-size: clamp(0.75rem, 2vw, 0.82rem);
+}
+.text-xs {
+  font-size: clamp(0.65rem, 2vw, 0.72rem);
+}
+.fw-600 {
+  font-weight: 600;
+}
 
 .two-col {
   display: grid;
@@ -1112,7 +1229,7 @@ table.matrix td.check {
 }
 
 .source-panel:hover {
-  border-color: rgba(255,255,255,0.12);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .source-panel-header {
@@ -1120,7 +1237,7 @@ table.matrix td.check {
   align-items: center;
   gap: 0.6rem;
   padding: 0.6rem 1rem;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   border-bottom: 1px solid var(--border-subtle);
   font-size: clamp(0.65rem, 2vw, 0.72rem);
   flex-wrap: wrap;
@@ -1172,7 +1289,7 @@ table.matrix td.check {
 }
 
 .source-code .line:hover {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .source-code .line-num {
@@ -1192,14 +1309,31 @@ table.matrix td.check {
 }
 
 /* Syntax colors for source-code blocks */
-.source-code .kw { color: #c792ea; }
-.source-code .fn { color: #82aaff; }
-.source-code .str { color: #c3e88d; }
-.source-code .cm { color: var(--text-tertiary); font-style: italic; }
-.source-code .type { color: #ffcb6b; }
-.source-code .num { color: #f78c6c; }
-.source-code .pp { color: #89ddff; }
-.source-code .op { color: #89ddff; }
+.source-code .kw {
+  color: #c792ea;
+}
+.source-code .fn {
+  color: #82aaff;
+}
+.source-code .str {
+  color: #c3e88d;
+}
+.source-code .cm {
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+.source-code .type {
+  color: #ffcb6b;
+}
+.source-code .num {
+  color: #f78c6c;
+}
+.source-code .pp {
+  color: #89ddff;
+}
+.source-code .op {
+  color: #89ddff;
+}
 
 /* Highlight important lines */
 .source-code .line.highlight {
@@ -1216,49 +1350,49 @@ table.matrix td.check {
     padding: 1.5rem;
     padding-top: 4rem;
   }
-  
+
   .two-col {
     gap: 1.5rem;
   }
-  
+
   .card-grid-2,
   .card-grid-3,
   .card-grid-4 {
     grid-template-columns: 1fr;
   }
-  
+
   .arch-layer {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.75rem;
   }
-  
+
   .arch-layer-label {
     min-width: auto;
   }
-  
+
   .dep-row {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .dep-node {
     min-width: auto;
     width: 100%;
   }
-  
+
   .dep-arrow {
     transform: rotate(90deg);
   }
-  
+
   .flow-step {
     gap: 0.75rem;
   }
-  
+
   .flow-step-code {
     font-size: 0.7rem;
   }
-  
+
   .key-value .kv-key {
     min-width: 70px;
   }
@@ -1269,7 +1403,7 @@ table.matrix td.check {
   .nav-links {
     display: none;
   }
-  
+
   .dot-nav {
     display: none;
   }
@@ -1281,127 +1415,128 @@ table.matrix td.check {
     --radius-md: 8px;
     --radius-sm: 6px;
   }
-  
+
   .slide {
     padding: 1rem;
     padding-top: 3.5rem;
   }
-  
+
   .title-main {
     margin-bottom: 1rem;
   }
-  
+
   .title-desc {
     margin-bottom: 1.5rem;
   }
-  
+
   .title-meta {
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
   }
-  
+
   .card {
     padding: 1rem;
   }
-  
+
   .tech-badges {
     gap: 0.5rem;
   }
-  
+
   .badge {
     padding: 0.4rem 0.8rem;
     font-size: 0.7rem;
   }
-  
+
   .bmi-scale {
     height: 20px;
   }
-  
+
   .bmi-scale-segment {
     font-size: 0.45rem;
     padding: 0 0.1rem;
   }
-  
+
   .bmi-labels span {
     font-size: 0.5rem;
     min-width: 45px;
   }
-  
+
   .bmi-card-header {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .terminal-body {
     padding: 0.75rem;
     font-size: 0.65rem;
   }
-  
+
   .code-block {
     padding: 0.75rem;
     font-size: 0.7rem;
   }
-  
+
   .source-code {
     font-size: 0.65rem;
   }
-  
+
   .source-code .line {
     padding: 0 0.75rem;
   }
-  
+
   .source-code .line-num {
     min-width: 1.5rem;
     padding-right: 0.75rem;
   }
-  
+
   .flow-step {
     gap: 0.5rem;
   }
-  
+
   .flow-step-num {
     width: 22px;
     height: 22px;
     font-size: 0.6rem;
   }
-  
+
   .flow-step-title {
     font-size: 0.8rem;
   }
-  
+
   .flow-step-code {
     font-size: 0.65rem;
   }
-  
+
   .keyboard-hint {
     bottom: 0.75rem;
     font-size: 0.6rem;
   }
-  
+
   .kbd {
     font-size: 0.55rem;
     padding: 0.1rem 0.3rem;
     min-width: 18px;
   }
-  
+
   .component-header {
     padding: 0.75rem;
   }
-  
+
   .component-body {
     padding: 0.75rem;
   }
-  
+
   .file-tag {
     font-size: 0.6rem;
   }
-  
+
   .table-wrapper {
     font-size: 0.65rem;
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: 0.5rem;
   }
 }
@@ -1411,47 +1546,47 @@ table.matrix td.check {
   .slide-title {
     font-size: 1.6rem;
   }
-  
+
   .title-main {
     font-size: 1.8rem;
   }
-  
+
   .slide-subtitle {
     font-size: 0.85rem;
   }
-  
+
   .card-title {
     font-size: 0.85rem;
   }
-  
+
   .card-desc {
     font-size: 0.75rem;
   }
-  
+
   .terminal-body {
     font-size: 0.6rem;
   }
-  
+
   .code-block {
     font-size: 0.65rem;
   }
-  
+
   .bmi-card-cat {
     font-size: 0.75rem;
   }
-  
+
   .bmi-card-range {
     font-size: 0.65rem;
   }
-  
+
   .bmi-card-detail {
     font-size: 0.65rem;
   }
-  
+
   .flow-step-title {
     font-size: 0.75rem;
   }
-  
+
   .flow-step-code {
     font-size: 0.6rem;
   }
@@ -1459,9 +1594,27 @@ table.matrix td.check {
 
 /* Print styles */
 @media print {
-  html { scroll-snap-type: none; }
-  .slide { min-height: auto; page-break-after: always; }
-  .navbar, .dot-nav, .keyboard-hint, #progress-bar { display: none; }
-  body { background: white; color: black; }
-  .card, .terminal, .arch-layer, .dep-map { border-color: #ccc; }
+  html {
+    scroll-snap-type: none;
+  }
+  .slide {
+    min-height: auto;
+    page-break-after: always;
+  }
+  .navbar,
+  .dot-nav,
+  .keyboard-hint,
+  #progress-bar {
+    display: none;
+  }
+  body {
+    background: white;
+    color: black;
+  }
+  .card,
+  .terminal,
+  .arch-layer,
+  .dep-map {
+    border-color: #ccc;
+  }
 }
